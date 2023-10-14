@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.javaendassignment.Database"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="WelcomeLabel11" layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" translateX="250.0" translateY="168.0" />
+      <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="56.0" text="It is now:" translateX="200.0" translateY="150.0" />
+      <Label fx:id="RoleLable" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="106.0" />
+      <Label fx:id="WelcomeLabel1" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="163.0" text="  " translateX="200.0" translateY="60.0" />
+      <Label prefHeight="17.0" prefWidth="67.0" text="Your role is:" translateX="200.0" translateY="70.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></Label>
+      <VBox fillWidth="false" maxHeight="700.0" maxWidth="160.0" minHeight="400.0" minWidth="160.0" prefHeight="500.0" prefWidth="160.0" scaleZ="0.0" style="-fx-background-color: #AEEEEE;" translateY="-70.0" translateZ="200.0">
+         <children>
+            <Button fx:id="DashboardButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Dashboard">
+               <VBox.margin>
+                  <Insets left="21.0" top="55.0" />
+               </VBox.margin></Button>
+            <Button fx:id="CreateOrderButton" layoutX="37.0" layoutY="65.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Create Order">
+               <VBox.margin>
+                  <Insets left="21.0" top="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="ProductInventoryButton" layoutX="10.0" layoutY="97.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Product Inventory">
+               <VBox.margin>
+                  <Insets left="21.0" top="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="OrderHistoryButton" layoutX="10.0" layoutY="128.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Order History">
+               <VBox.margin>
+                  <Insets left="21.0" top="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="-18.0" />
+         </VBox.margin></VBox>
+   </children>
+</VBox>
