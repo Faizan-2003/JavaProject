@@ -3,18 +3,22 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="WelcomeLabel11" layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" translateX="250.0" translateY="168.0" />
-      <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="56.0" text="It is now:" translateX="200.0" translateY="150.0" />
-      <Label fx:id="RoleLable" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="106.0" />
-      <Label fx:id="WelcomeLabel1" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="163.0" text="  " translateX="200.0" translateY="60.0" />
-      <Label prefHeight="17.0" prefWidth="67.0" text="Your role is:" translateX="200.0" translateY="70.0" VBox.vgrow="ALWAYS">
+      <Label fx:id="DateTimeLable" layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" translateX="250.0" translateY="103.0" />
+      <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="56.0" text="It is now:" translateX="200.0" translateY="85.0" />
+      <Label fx:id="RoleLable" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="50.0" />
+      <Label fx:id="WelcomeLabel" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="213.0" translateX="200.0">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label prefHeight="17.0" prefWidth="67.0" text="Your role is:" translateX="200.0" translateY="5.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets />
          </VBox.margin></Label>
-      <VBox fillWidth="false" maxHeight="700.0" maxWidth="160.0" minHeight="400.0" minWidth="160.0" prefHeight="500.0" prefWidth="160.0" scaleZ="0.0" style="-fx-background-color: #AEEEEE;" translateY="-70.0" translateZ="200.0">
+      <VBox fillWidth="false" maxHeight="700.0" maxWidth="160.0" minHeight="516.0" minWidth="160.0" prefHeight="443.0" prefWidth="160.0" scaleZ="0.0" style="-fx-background-color: #AEEEEE;" translateY="-79.0" translateZ="200.0">
          <children>
             <Button fx:id="DashboardButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Dashboard">
                <VBox.margin>
