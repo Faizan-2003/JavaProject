@@ -37,7 +37,15 @@ public class Database {
             return null; // Return null or a default role when the user is not found
         }
     }
-    public boolean isValidUser(String username, String password) {
+
+  public String getUserFullName(String username) {
+    User user = users.get(username);
+    if (user != null) {
+      return user.getFullName();
+    }
+    return null; // Return null
+}
+        public boolean isValidUser(String username, String password) {
         User user = users.get(username);
         return user != null && user.getPassword().equals(password);
     }

@@ -1,6 +1,7 @@
 package com.example.javaendassignment.Model;
 
 public class User {
+    private final String fullName;
     private String name;
     private String role;
     private String password;
@@ -9,6 +10,7 @@ public class User {
         this.name = name;
         this.role = role;
         this.password = password;
+        this.fullName = name;
     }
 
     public String getName() {
@@ -21,5 +23,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

@@ -77,16 +77,19 @@ public class LoginController {
             // Get the DashboardController instance
             DashboardController dashboardController = fxmlLoader.getController();
 
+            // Retrieve the full name from the database based on the username
+            String fullName = database.getUserFullName(userName);
+
             // Initialize the DashboardController with user information
-            dashboardController.initialize(userName, userRole);
+            dashboardController.initialize(fullName, userRole);
+
+            Stage stage = (Stage) UsernameField.getScene().getWindow();
             Scene scene = new Scene(root, 914, 515);
-            Stage stage = (Stage) loginButton.getScene().getWindow(); // Use the appropriate UI element to get the stage
             stage.setTitle("Dashboard");
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
 }

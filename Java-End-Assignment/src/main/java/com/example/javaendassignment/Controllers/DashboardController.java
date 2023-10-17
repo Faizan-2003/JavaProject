@@ -12,20 +12,20 @@ public class DashboardController {
     private Label WelcomeLabel;
 
     @FXML
-    private Label UserRoleLable;
+    private Label UserRoleLabel;
 
     @FXML
-    private Label DateTimeLable;
+    private Label DateTimeLabel;
 
     public void initialize(String userName, String userRole) {
         // Set user's name and role
         WelcomeLabel.setText("Welcome " + userName + "!");
-        UserRoleLable.setText(userRole);
+        UserRoleLabel.setText(userRole);
 
         // Set current date and time
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date now = new Date();
-        DateTimeLable.setText(dateFormat.format(now));
+        DateTimeLabel.setText(dateFormat.format(now));
     }
 
 }
