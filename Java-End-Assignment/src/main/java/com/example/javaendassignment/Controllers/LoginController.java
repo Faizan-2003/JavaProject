@@ -46,11 +46,29 @@ public class LoginController {
             });
     }
     public boolean isPasswordValid(String password) {
-        boolean hasSpecialChar = password.matches(".*[!@#$%^&*()].*");
-        boolean hasUpperCase = password.matches(".*[A-Z].*");
-        boolean hasNumber = password.matches(".*\\d.*");
-        return hasSpecialChar && hasUpperCase && hasNumber;
+        boolean hasSpecialChar = false;
+        boolean hasUpperCase = false;
+        boolean hasNumber = false;
+
+        if (password.length() >= 8) {
+            for (char c : password.toCharArray()) {
+                if (!hasSpecialChar && "!@#$%^&*()".contains(String.valueOf(c))) {
+                    hasSpecialChar = true;
+                } else if (!hasUpperCase && Character.isUpperCase(c)) {
+                    hasUpperCase = true;
+                } else if (!hasNumber && Character.isDigit(c)) {
+                    hasNumber = true;
+                }
+
+                if (hasSpecialChar && hasUpperCase && hasNumber) {
+                    return true; // All criteria are met, so the password is valid
+                }
+            }
+        }
+
+        return false; // Password doesn't meet all the criteria
     }
+
     @FXML
     private void onLoginButtonClick() {
         String username = UsernameField.getText();
@@ -91,5 +109,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+
 
 }
