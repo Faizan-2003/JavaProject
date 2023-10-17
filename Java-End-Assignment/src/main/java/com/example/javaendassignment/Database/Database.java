@@ -1,5 +1,5 @@
 package com.example.javaendassignment.Database;
-
+import com.example.javaendassignment.Model.User;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,10 +8,8 @@ public class Database {
 
     // Constructor to initialize the database with sample data
     public Database() {
-        users.put("faizan", new User("Muhammad Faizan", "Manager", "12390"));
-        users.put("jane", new User("Jane Smith", "Salesman", "12345"));
-        users.put("john", new User("John Doe", "Accountant", "23467"));
-        users.put("susan", new User("Susan Johnson", "Supervisor", "45368"));
+        users.put("faizan", new User("Muhammad Faizan", "Manager", "Faizan@321"));
+        users.put("tommy", new User("Tommy Shebly", "Salesperson", "Tommy@123"));
     }
 
     // Method to get all users
@@ -24,23 +22,21 @@ public class Database {
         return users.get(userId);
     }
 
-    // Inner class representing a user
-    public static class User {
-        private String name;
-        private String role;
-        private String password;
-
-        public String getPassword() {
-            return password;
-        }
-
-        public User(String name, String role, String password) {
-            this.name = name;
-            this.role = role;
-            this.password = password;
-        }
+    // Method to insert a new user into the database
+    public void addUser(String username, User user) {
+        users.put(username, user);
     }
 
+    // Inner class representing a user
+
+    public String getUserRole(String username) {
+        User user = users.get(username);
+        if (user != null) {
+            return user.getRole();
+        } else {
+            return null; // Return null or a default role when the user is not found
+        }
+    }
     public boolean isValidUser(String username, String password) {
         User user = users.get(username);
         return user != null && user.getPassword().equals(password);

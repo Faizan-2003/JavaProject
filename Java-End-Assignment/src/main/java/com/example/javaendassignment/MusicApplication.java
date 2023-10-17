@@ -9,11 +9,11 @@ import com.example.javaendassignment.Database.Database;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MusicApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        FXMLLoader fxmlLoader = new FXMLLoader(MusicApplication.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 401, 256);
         stage.setTitle("Login");
         stage.setScene(scene);
 

@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaendassignment.Controllers.DashboardController">
    <children>
       <Label fx:id="DateTimeLable" layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" translateX="250.0" translateY="103.0" />
       <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="56.0" text="It is now:" translateX="200.0" translateY="85.0" />
-      <Label fx:id="RoleLable" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="50.0" />
+      <Label fx:id="UserRoleLable" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="50.0" />
       <Label fx:id="WelcomeLabel" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="213.0" translateX="200.0">
          <font>
             <Font size="18.0" />
