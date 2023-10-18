@@ -1,4 +1,4 @@
-# JavaProject
-Java End Assignment
+# Java End Assignment
+
 Muhammad Faizan 
 701765
