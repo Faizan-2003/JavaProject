@@ -12,21 +12,6 @@ public class Database {
         users.put("tommy", new User("Tommy Shebly", "Salesperson", "Tommy@123"));
     }
 
-    // Method to get all users
-    public Map<String, User> getAllUsers() {
-        return users;
-    }
-
-    // Method to get a user by their ID
-    public User getUserById(String userId) {
-        return users.get(userId);
-    }
-
-    // Method to insert a new user into the database
-    public void addUser(String username, User user) {
-        users.put(username, user);
-    }
-
     // Inner class representing a user
 
     public String getUserRole(String username) {

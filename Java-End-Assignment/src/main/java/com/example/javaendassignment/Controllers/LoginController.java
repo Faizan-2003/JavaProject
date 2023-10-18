@@ -35,10 +35,7 @@ public class LoginController {
     loginButton.setDisable(true);
 
     // Listen for changes in the passwordField text
-    passwordField
-        .textProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
+    passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
               // Check if the password meets the criteria
               boolean isValidPassword = isPasswordValid(newValue);
               // Enable the login button if the password is valid
@@ -50,24 +47,23 @@ public class LoginController {
         boolean hasUpperCase = false;
         boolean hasNumber = false;
 
-        if (password.length() >= 8) {
-            for (char c : password.toCharArray()) {
-                if (!hasSpecialChar && "!@#$%^&*()".contains(String.valueOf(c))) {
-                    hasSpecialChar = true;
-                } else if (!hasUpperCase && Character.isUpperCase(c)) {
-                    hasUpperCase = true;
-                } else if (!hasNumber && Character.isDigit(c)) {
-                    hasNumber = true;
-                }
+        for (char c : password.toCharArray()) {
+            if ("!@#$%^&*()".contains(String.valueOf(c))) {
+                hasSpecialChar = true;
+            } else if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isDigit(c)) {
+                hasNumber = true;
+            }
 
-                if (hasSpecialChar && hasUpperCase && hasNumber) {
-                    return true; // All criteria are met, so the password is valid
-                }
+            if (hasSpecialChar && hasUpperCase && hasNumber && password.length() >= 8) {
+                return true; // Password is valid
             }
         }
 
-        return false; // Password doesn't meet all the criteria
+        return false; // Password does not meet all criteria
     }
+
 
     @FXML
     private void onLoginButtonClick() {
@@ -85,8 +81,6 @@ public class LoginController {
 
     }
 
-    // Switch to the dashboard screen
-    // Switch to the dashboard screen
     private void switchToDashboardScreen(String userName, String userRole) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MusicApplication.class.getResource("Dashboard.fxml"));

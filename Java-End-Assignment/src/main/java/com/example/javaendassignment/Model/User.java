@@ -12,11 +12,6 @@ public class User {
         this.password = password;
         this.fullName = name;
     }
-
-    public String getName() {
-        return name;
-    }
-
     public String getRole() {
         return role;
     }
