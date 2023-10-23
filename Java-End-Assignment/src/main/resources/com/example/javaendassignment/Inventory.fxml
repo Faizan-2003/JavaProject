@@ -21,7 +21,7 @@
             </columns>
         </TableView>
         <Button fx:id="buttonAddProduct" layoutX="31.0" layoutY="449.0" mnemonicParsing="false" onAction="#openAddProductWindow" prefHeight="25.0" prefWidth="90.0" text="Add Product" />
-        <Button fx:id="buttonDeleteProduct" layoutX="134.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="25.0" prefWidth="109.0" text="Delete Product" />
-        <Button fx:id="buttonCreateOrder" layoutX="258.0" layoutY="449.0" mnemonicParsing="false" onAction="#createOrderWindow" prefHeight="25.0" prefWidth="90.0" text="Create Order" />
+        <Button fx:id="buttonDeleteProduct" layoutX="245.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="25.0" prefWidth="109.0" text="Delete Product" />
+        <Button fx:id="buttonEditProduct" layoutX="138.0" layoutY="449.0" mnemonicParsing="false" onAction="#editProduct" prefHeight="25.0" prefWidth="90.0" text="Edit Product" />
     </children>
 </AnchorPane>

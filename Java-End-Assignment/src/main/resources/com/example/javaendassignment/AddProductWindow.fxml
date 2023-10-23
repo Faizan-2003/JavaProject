@@ -22,6 +22,6 @@
       <TextField fx:id="textNameAP" layoutX="126.0" layoutY="87.0" />
       <TextField fx:id="textStockAP" layoutX="126.0" layoutY="57.0" />
       <Button fx:id="buttonCancelAP" layoutX="133.0" layoutY="236.0" mnemonicParsing="false" onAction="#goBackToInventory" prefHeight="25.0" prefWidth="86.0" text="Cancel" />
-      <Button fx:id="buttonSaveAP" layoutX="31.0" layoutY="236.0" mnemonicParsing="false" onAction="#saveTheProduct" prefHeight="25.0" prefWidth="86.0" text="Save" />
+      <Button fx:id="buttonAddAP" layoutX="31.0" layoutY="236.0" mnemonicParsing="false" onAction="#saveTheProduct" prefHeight="25.0" prefWidth="86.0" text="Add Product" />
    </children>
 </AnchorPane>

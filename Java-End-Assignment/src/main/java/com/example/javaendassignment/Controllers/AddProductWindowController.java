@@ -59,4 +59,5 @@ public class AddProductWindowController {
         // Close the Add Product window
         stage.close();
     }
+
 }

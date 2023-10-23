@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,19 +23,11 @@ public class InventoryController {
     private TableView<Product> tableProductsInventory;
 
     @FXML
-    private Button buttonAddProduct;
-    @FXML
-    private Button buttonDeleteProduct;
-    @FXML
-    private Button buttonCreateOrder;
-    @FXML
     private TableColumn stockColumn;
     @FXML
     private TableColumn nameColumn;
     @FXML
     private TableColumn categoryColumn;
-    @FXML
-    private TableColumn priceCategory;
     @FXML
     private TableColumn priceColumn;
     @FXML
@@ -89,11 +80,57 @@ public class InventoryController {
       tableProductsInventory.getItems().add(product);
     }
 
-    public void createOrderWindow(ActionEvent actionEvent) {
-
-    }
-
     public void deleteProduct(ActionEvent actionEvent) {
+         // Get the selected product from the table view
+        Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
 
+        if (selectedProduct != null) {
+            // Remove the product from the table view
+            tableProductsInventory.getItems().remove(selectedProduct);
+
+            // Remove the product from the database
+            Database.getInstance().deleteProduct(selectedProduct);
+        }
     }
+
+    public void editProduct(ActionEvent actionEvent) {
+        // Get the selected product from the table view
+        Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct != null) {
+            openEditProductWindow(selectedProduct);
+        }
+    }
+    private void openEditProductWindow(Product selectedProduct) {
+        try {
+            // Load the EditProductWindow.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/EditProduct-Window.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the "Edit Product" window
+            Stage editProductStage = new Stage();
+            editProductStage.setTitle("Edit Product");
+            editProductStage.setScene(new Scene(root));
+
+            // Set the controller for the "Edit Product" window
+            EditProductWindowController editProductController = loader.getController();
+            editProductController.setStage(editProductStage);
+            editProductController.setInventoryController(this);
+            editProductController.setProductToEdit(selectedProduct); // Pass the selected product
+
+            // Show the "Edit Product" window
+            editProductStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateProductInTable(Product updatedProduct) {
+        // Find the index of the updated product in the table
+        int index = tableProductsInventory.getItems().indexOf(updatedProduct);
+        if (index >= 0) {
+            // Update the product in the table view
+            tableProductsInventory.getItems().set(index, updatedProduct);
+        }
+    }
+
 }

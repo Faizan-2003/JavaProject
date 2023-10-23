@@ -89,4 +89,22 @@ public class Database {
         // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
         saveDataToFile();
     }
+    public void updateProduct(Product updatedProduct) {
+        // Check if the product exists in the database
+        if (products.containsKey(updatedProduct.getName())) {
+            // Update the product in the database
+            products.put(updatedProduct.getName(), updatedProduct);
+
+            // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
+            saveDataToFile();
+        }
+    }
+    public void deleteProduct(Product product) {
+        // Remove the product from the database
+        products.remove(product.getName());
+
+        // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
+        saveDataToFile();
+    }
+
 }

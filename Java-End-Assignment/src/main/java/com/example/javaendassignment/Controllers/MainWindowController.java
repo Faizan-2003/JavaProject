@@ -26,7 +26,7 @@ public class MainWindowController {
     private Label labelDateTime;
     @FXML
     private Button buttonDashboard;
-    String userName; // Add these fields
+    String userName;
     String userRole;
     String dateTime;
 

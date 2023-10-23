@@ -38,4 +38,24 @@ public class Product implements Serializable {
     public int getStock() {
         return stock;
     }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+
 }
