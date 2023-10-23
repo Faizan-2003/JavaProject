@@ -26,15 +26,16 @@ public class MainWindowController {
     private Label labelDateTime;
     @FXML
     private Button buttonDashboard;
-
-    // Constructor or initialize method where you set the database
-    public void initialize(Database database) {
-        this.database = this.database;
-    }
     String userName; // Add these fields
     String userRole;
     String dateTime;
-    private LoginController loginController;
+
+    public void initialize(Database database) {
+        this.database = database;
+    }
+
+    // Other fields as before...
+
     public void setUserData(String userName, String userRole, String dateTime) {
         labelWelcome.setText("Welcome " + userName + "!");
         labelRole.setText("Your role is: " + userRole);
@@ -47,8 +48,6 @@ public class MainWindowController {
     }
 
     public void goToDashboard(ActionEvent actionEvent) {
-        setUserData(userName, userRole, dateTime);
-
         // Get the reference to the Dashboard button's Scene and Stage
         Stage stage = (Stage) buttonDashboard.getScene().getWindow();
 
@@ -56,19 +55,14 @@ public class MainWindowController {
         openMainWindow(userName, stage);
     }
 
+    // The rest of your code...
+
     private void openMainWindow(String username, Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/MainWindow.fxml"));
             Parent root = loader.load();
 
             MainWindowController mainWindowController = loader.getController();
-
-            // Set the user's name, role, and date/time
-            String userRole = database.getUserRole(username);
-            String userName = database.getUserFullName(username);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            Date now = new Date();
-            String dateTime = dateFormat.format(now);
 
             // Pass the values to MainWindowController
             mainWindowController.setUserData(userName, userRole, dateTime);
