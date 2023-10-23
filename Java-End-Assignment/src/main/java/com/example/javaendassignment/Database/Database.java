@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Database {
     private static Map<String, User> users = new HashMap<>();
+    public static String currentUserUsername; // Static variable to store the currently logged-in user's username
 
     // Constructor to initialize the database with sample data
     public Database() {
@@ -23,14 +24,15 @@ public class Database {
         }
     }
 
-  public String getUserFullName(String username) {
-    User user = users.get(username);
-    if (user != null) {
-      return user.getFullName();
+    public String getUserFullName(String username) {
+        User user = users.get(username);
+        if (user != null) {
+            return user.getFullName();
+        }
+        return null; // Return null
     }
-    return null; // Return null
-}
-        public boolean isValidUser(String username, String password) {
+
+    public boolean isValidUser(String username, String password) {
         User user = users.get(username);
         return user != null && user.getPassword().equals(password);
     }

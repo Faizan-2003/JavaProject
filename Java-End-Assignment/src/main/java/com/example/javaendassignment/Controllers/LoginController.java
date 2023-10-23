@@ -1,7 +1,6 @@
 package com.example.javaendassignment.Controllers;
-import com.example.javaendassignment.Model.User;
 import com.example.javaendassignment.Database.Database;
-import com.example.javaendassignment.MusicApplication;
+import com.example.javaendassignment.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -12,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class LoginController {
 
@@ -29,19 +30,20 @@ public class LoginController {
 
     private Database database;
 
-  public void initialize(Database database) {
-    this.database = database;
-    // Disable the login button initially
-    loginButton.setDisable(true);
+    public void initialize(Database database) {
+        this.database = database;
+        // Disable the login button initially
+        loginButton.setDisable(true);
 
-    // Listen for changes in the passwordField text
-    passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-              // Check if the password meets the criteria
-              boolean isValidPassword = isPasswordValid(newValue);
-              // Enable the login button if the password is valid
-              loginButton.setDisable(!isValidPassword);
-            });
+        // Listen for changes in the passwordField text
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Check if the password meets the criteria
+            boolean isValidPassword = isPasswordValid(newValue);
+            // Enable the login button if the password is valid
+            loginButton.setDisable(!isValidPassword);
+        });
     }
+
     public boolean isPasswordValid(String password) {
         boolean hasSpecialChar = false;
         boolean hasUpperCase = false;
@@ -64,46 +66,47 @@ public class LoginController {
         return false; // Password does not meet all criteria
     }
 
-
     @FXML
     private void onLoginButtonClick() {
         String username = UsernameField.getText();
         String password = passwordField.getText();
 
         if (database.isValidUser(username, password)) {
-            // User is authenticated, get user information and switch to the dashboard screen
-            String userRole = database.getUserRole(username); // Retrieve the user's role
-            switchToDashboardScreen(username, userRole);
+            // User is authenticated, open the main window
+            openMainWindow(username);
         } else {
             // Invalid credentials, display an error message in red color
             ErrorMessage.setText("Invalid username or password");
         }
-
     }
 
-    private void switchToDashboardScreen(String userName, String userRole) {
+    private void openMainWindow(String username) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MusicApplication.class.getResource("Dashboard.fxml"));
-            Parent root = fxmlLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/MainWindow.fxml"));
+            Parent root = loader.load();
 
-            // Get the DashboardController instance
-            DashboardController dashboardController = fxmlLoader.getController();
+            MainWindowController mainWindowController = loader.getController();
 
-            // Retrieve the full name from the database based on the username
-            String fullName = database.getUserFullName(userName);
+            // Pass the database object to the MainWindowController
+            mainWindowController.initialize(database);
 
-            // Initialize the DashboardController with user information
-            dashboardController.initialize(fullName, userRole);
+            // Set the user's name, role, and date/time
+            String userRole = database.getUserRole(username);
+            String userName = database.getUserFullName(username);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date now = new Date();
+            String dateTime = dateFormat.format(now);
 
-            Stage stage = (Stage) UsernameField.getScene().getWindow();
-            Scene scene = new Scene(root, 914, 515);
-            stage.setTitle("Dashboard");
+            // Pass the values to MainWindowController
+            mainWindowController.setUserData(userName, userRole, dateTime);
+
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Main Window");
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
 }

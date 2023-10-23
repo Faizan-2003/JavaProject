@@ -1,47 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaendassignment.Controllers.DashboardController">
+<AnchorPane fx:id="dashboardPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaendassignment.Controllers.DashboardController">
    <children>
-      <Label fx:id="DateTimeLabel" layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" translateX="250.0" translateY="103.0" />
-      <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="56.0" text="It is now:" translateX="200.0" translateY="85.0" />
-      <Label fx:id="UserRoleLabel" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="110.0" translateX="266.0" translateY="50.0" />
-      <Label fx:id="WelcomeLabel" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="287.0" translateX="200.0">
+      <Label fx:id="dateTimetlabel" layoutX="52.0" layoutY="126.0" prefHeight="17.0" prefWidth="294.0" />
+      <Label fx:id="roleLabel" layoutX="52.0" layoutY="108.0" prefHeight="17.0" prefWidth="294.0" />
+      <Label fx:id="welcomeLabel" layoutX="52.0" layoutY="59.0" prefHeight="40.0" prefWidth="369.0">
          <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label prefHeight="17.0" prefWidth="67.0" text="Your role is:" translateX="200.0" translateY="5.0" VBox.vgrow="ALWAYS">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Label>
-      <VBox fillWidth="false" maxHeight="700.0" maxWidth="160.0" minHeight="516.0" minWidth="160.0" prefHeight="443.0" prefWidth="160.0" scaleZ="0.0" style="-fx-background-color: #AEEEEE;" translateY="-79.0" translateZ="200.0">
-         <children>
-            <Button fx:id="DashboardButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Dashboard">
-               <VBox.margin>
-                  <Insets left="21.0" top="55.0" />
-               </VBox.margin></Button>
-            <Button fx:id="CreateOrderButton" layoutX="37.0" layoutY="65.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Create Order">
-               <VBox.margin>
-                  <Insets left="21.0" top="15.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="ProductInventoryButton" layoutX="10.0" layoutY="97.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Product Inventory">
-               <VBox.margin>
-                  <Insets left="21.0" top="15.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="OrderHistoryButton" layoutX="10.0" layoutY="128.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #79A6A6;" text="Order History">
-               <VBox.margin>
-                  <Insets left="21.0" top="15.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets top="-18.0" />
-         </VBox.margin></VBox>
+            <Font size="28.0" />
+         </font>
+      </Label>
    </children>
-</VBox>
+</AnchorPane>

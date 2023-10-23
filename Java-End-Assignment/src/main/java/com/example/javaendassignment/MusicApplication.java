@@ -1,34 +1,35 @@
 package com.example.javaendassignment;
 
 import com.example.javaendassignment.Controllers.LoginController;
+import com.example.javaendassignment.Controllers.MainWindowController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.example.javaendassignment.Database.Database;
 
-import java.io.IOException;
-
 public class MusicApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MusicApplication.class.getResource("Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 401, 256);
-        stage.setTitle("Login");
-        stage.setScene(scene);
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-        // Initialize the database
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Create a new instance of the database
         Database database = new Database();
 
-        // Inject the database into the controller
-        LoginController controller = fxmlLoader.getController();
-        controller.initialize(database);
+        // Load the Login screen with a specific size
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent loginRoot = loginLoader.load();
+        LoginController loginController = loginLoader.getController();
+        loginController.initialize(database);
 
-        stage.show();
+        // Set up the initial scene to display the Login screen
+        Scene loginScene = new Scene(loginRoot);
+        primaryStage.setScene(loginScene);
+        primaryStage.setTitle("Login");
+        primaryStage.show();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
-
 }

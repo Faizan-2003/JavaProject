@@ -36,10 +36,10 @@
                <Font size="18.0" />
             </font></Label>
             <TextField fx:id="UsernameField" GridPane.columnIndex="1" />
-            <PasswordField fx:id="passwordField"  prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="loginButton" onAction="#onLoginButtonClick" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: #AEEEEE;" text="Login" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="loginButton" onAction="#onLoginButtonClick" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: #3876BF;" text="Login" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <font>
-               <Font size="14.0" />
+               <Font size="15.0" />
             </font></Button>
         </children>
       <VBox.margin>
