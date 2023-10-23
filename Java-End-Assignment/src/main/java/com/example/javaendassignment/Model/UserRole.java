@@ -1,4 +1,8 @@
 package com.example.javaendassignment.Model;
 
-public class UserRole {
+import java.io.Serializable;
+
+public enum  UserRole implements Serializable{
+    salesperson,
+    manager
 }

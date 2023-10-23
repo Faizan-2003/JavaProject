@@ -1,19 +1,18 @@
 package com.example.javaendassignment.Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private final String fullName;
     private String name;
-    private String role;
     private String password;
+    private UserRole role;
 
-    public User(String name, String role, String password) {
+    public User(String name, UserRole role, String password) {
         this.name = name;
-        this.role = role;
         this.password = password;
         this.fullName = name;
-    }
-    public String getRole() {
-        return role;
+        this.role = role;
     }
 
     public String getPassword() {
@@ -23,4 +22,7 @@ public class User {
     public String getFullName() {
         return fullName;
     }
+
+    public UserRole getRole() {return role;}
+
 }

@@ -91,7 +91,7 @@ public class LoginController {
             mainWindowController.initialize(database);
 
             // Set the user's name, role, and date/time
-            String userRole = database.getUserRole(username);
+            String userRole = String.valueOf(database.getUserRole(username));
             String userName = database.getUserFullName(username);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date now = new Date();
@@ -102,7 +102,7 @@ public class LoginController {
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Scene scene = new Scene(root);
-            stage.setTitle("Main Window");
+            stage.setTitle("Dashboard");
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

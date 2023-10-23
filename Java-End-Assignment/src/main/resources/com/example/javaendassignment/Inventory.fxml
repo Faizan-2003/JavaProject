@@ -13,15 +13,15 @@
             </font></Label>
         <TableView fx:id="tableProductsInventory" layoutX="20.0" layoutY="61.0" prefHeight="364.0" prefWidth="715.0">
             <columns>
-                <TableColumn prefWidth="60.333343505859375" text="Stock" />
-                <TableColumn prefWidth="278.33331298828125" text="Name" />
-                <TableColumn prefWidth="121.33334350585938" text="Category" />
-                <TableColumn prefWidth="63.33331298828125" text="Price" />
-                <TableColumn prefWidth="198.66668701171875" text="Description" />
+                <TableColumn fx:id="stockColumn" prefWidth="60.333343505859375" text="Stock" />
+                <TableColumn fx:id="nameColumn" prefWidth="278.33331298828125" text="Name" />
+                <TableColumn fx:id="categoryColumn" prefWidth="121.33334350585938" text="Category" />
+                <TableColumn fx:id="priceColumn" prefWidth="63.33331298828125" text="Price" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="198.66668701171875" text="Description" />
             </columns>
         </TableView>
-        <Button fx:id="buttonAddProduct" layoutX="31.0" layoutY="449.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Add Product" />
-        <Button fx:id="buttonDeleteProduct" layoutX="134.0" layoutY="449.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Delete Product" />
-        <Button fx:id="buttonCreateOrder" layoutX="258.0" layoutY="449.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Create Order" />
+        <Button fx:id="buttonAddProduct" layoutX="31.0" layoutY="449.0" mnemonicParsing="false" onAction="#openAddProductWindow" prefHeight="25.0" prefWidth="90.0" text="Add Product" />
+        <Button fx:id="buttonDeleteProduct" layoutX="134.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="25.0" prefWidth="109.0" text="Delete Product" />
+        <Button fx:id="buttonCreateOrder" layoutX="258.0" layoutY="449.0" mnemonicParsing="false" onAction="#createOrderWindow" prefHeight="25.0" prefWidth="90.0" text="Create Order" />
     </children>
 </AnchorPane>
