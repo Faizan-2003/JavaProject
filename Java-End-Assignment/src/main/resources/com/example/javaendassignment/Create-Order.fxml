@@ -31,10 +31,10 @@
       </Label>
       <TableView fx:id="tableProductsCO" layoutX="27.0" layoutY="239.0" prefHeight="200.0" prefWidth="700.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Quantity" />
-          <TableColumn prefWidth="325.0000305175781" text="Name" />
-            <TableColumn prefWidth="136.33331298828125" text="Category" />
-            <TableColumn prefWidth="89.33331298828125" text="Price" />
+          <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+          <TableColumn fx:id="nameColumn" prefWidth="325.0000305175781" text="Name" />
+            <TableColumn fx:id="categoryColumn" prefWidth="136.33331298828125" text="Category" />
+            <TableColumn fx:id="priceColumn" prefWidth="89.33331298828125" text="Price" />
             <TableColumn prefWidth="75.66668701171875" />
         </columns>
       </TableView>

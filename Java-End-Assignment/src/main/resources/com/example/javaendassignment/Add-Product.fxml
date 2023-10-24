@@ -4,20 +4,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VboxSelectProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="914.0" prefHeight="427.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="VboxSelectProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="914.0" prefHeight="427.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaendassignment.Controllers.AddProductToOrderController">
    <children>
       <Label prefHeight="34.0" prefWidth="178.0" text="Select Product" translateX="20.0" translateY="35.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TableView maxWidth="875.0" minHeight="100.0" minWidth="100.0" prefHeight="222.0" prefWidth="875.0" translateX="20.0" translateY="40.0">
+      <TableView fx:id="productTableView" maxWidth="875.0" minHeight="100.0" minWidth="100.0" prefHeight="222.0" prefWidth="875.0" translateX="20.0" translateY="40.0">
         <columns>
-          <TableColumn prefWidth="70.33333587646484" text="Stock" />
-          <TableColumn prefWidth="316.3333435058594" text="Name" />
-            <TableColumn prefWidth="109.00003051757812" text="Category" />
-            <TableColumn prefWidth="101.0" text="Price" />
-            <TableColumn prefWidth="247.0" text="Description" />
+          <TableColumn fx:id="stockColumn" prefWidth="70.33333587646484" text="Stock" />
+          <TableColumn fx:id="nameColumn" prefWidth="316.3333435058594" text="Name" />
+            <TableColumn fx:id="categoryColumn" prefWidth="109.00003051757812" text="Category" />
+            <TableColumn fx:id="priceColumn" prefWidth="101.0" text="Price" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="247.0" text="Description" />
         </columns>
       </TableView>
       <Label text="Quantity:" translateX="20.0" translateY="60.0">
@@ -26,7 +26,8 @@
          </font>
       </Label>
       <TextField fx:id="QuantityTextField" maxWidth="112.0" minWidth="100.0" prefHeight="25.0" prefWidth="112.0" translateX="130.0" translateY="39.0" />
-      <Button fx:id="AddToOrderButton" mnemonicParsing="false" prefHeight="23.0" prefWidth="95.0" text="Add to order" translateX="20.0" translateY="65.0" />
-      <Button fx:id="AddToOrderButton1" layoutX="10.0" layoutY="315.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="95.0" text="Cancel" translateX="130.0" translateY="40.0" />
+      <Label fx:id="labelErrorQuantity" prefHeight="17.0" prefWidth="322.0" textFill="RED" translateX="250.0" translateY="15.0" text=""/>
+      <Button fx:id="addToOrderButton" mnemonicParsing="false" onAction="#addItemToOrder" prefHeight="23.0" prefWidth="95.0" text="Add to order" translateX="20.0" translateY="65.0" />
+      <Button fx:id="buttonCancel" layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#goBackToCreateOrder" prefHeight="23.0" prefWidth="95.0" text="Cancel" translateX="130.0" translateY="40.0" />
    </children>
 </VBox>
