@@ -13,7 +13,7 @@
       </Label>
       <TableView fx:id="tableOrderHistory" layoutX="25.0" layoutY="54.0" prefHeight="200.0" prefWidth="673.0">
         <columns>
-          <TableColumn fx:id="orderDateTimeColumn" prefWidth="116.33332824707031" text="Date/time"/>
+          <TableColumn fx:id="orderDateTimeColumn" prefWidth="116.33332824707031" text="Date/time" />
           <TableColumn fx:id="customerFirstNameColumn" prefWidth="331.6666564941406" text="Name" />
             <TableColumn fx:id="totalPriceColumn" prefWidth="129.0" text="Total price" />
             <TableColumn prefWidth="95.99996948242188" />

@@ -4,6 +4,7 @@ import com.example.javaendassignment.Database.Database;
 import com.example.javaendassignment.Model.Order;
 import com.example.javaendassignment.Model.Product;
 import javafx.fxml.FXML;
+import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -72,6 +73,20 @@ public class OrderHistoryController {
             };
         });
         loadOrderHistory();
+
+        tableOrderHistory.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) { // Check for a single click
+                Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
+
+                if (selectedOrder != null) {
+                    // Retrieve the product details associated with the selected order
+                    List<Product> orderProducts = selectedOrder.getOrderItems();
+
+                    // Populate the product table with the products from the selected order
+                    tableOrderProducts.getItems().setAll(orderProducts);
+                }
+            }
+        });
     }
 
     private void loadOrderHistory() {
@@ -108,5 +123,17 @@ public class OrderHistoryController {
         }
 
         return product.getTotalPrice();
+    }
+
+    public void displayOrderProducts(SortEvent<TableView<Product>> tableViewSortEvent) {
+        Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
+
+        if (selectedOrder != null) {
+            // Retrieve the product details associated with the selected order
+            List<Product> orderProducts = selectedOrder.getOrderItems();
+
+            // Populate the productDetailsTable with the products from the selected order
+            tableOrderProducts.getItems().setAll(orderProducts);
+        }
     }
 }
