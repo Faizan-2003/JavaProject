@@ -40,54 +40,53 @@ public class OrderHistoryController {
     private ObservableList<Order> orderHistory;
     private ObservableList<Product> orderProducts;
 
-    public void initialize() {
-        database = Database.getInstance(); // Initialize the database here
-        database.loadDataFromFile(); // Load the data from the.dat file
+    public void initialize(){
 
-        // Initialize your table columns for order history
+        initializeDatabaseAndTables();
+        initializeTableColumns();
+        setupCellFactory();
+        initializeEventHandlers();
+        loadOrderHistory();
+    }
+
+    private void initializeDatabaseAndTables() {
+        database = Database.getInstance();
+        database.loadDataFromFile();
+    }
+
+    private void initializeTableColumns() {
         orderDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("orderDateTime"));
         customerFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerFirstName"));
         totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-
-        // Initialize your table columns for order products
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 
-        // Set the cell factory for formatting the date
-        orderDateTimeColumn.setCellFactory(column -> {
-            return new TableCell<Order, LocalDateTime>() {
-                @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        // Format the LocalDateTime as a string
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                        setText(item.format(formatter));
-                    }
-                }
-            };
-        });
-        loadOrderHistory();
-
-        tableOrderHistory.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) { // Check for a single click
-                Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
-
-                if (selectedOrder != null) {
-                    // Retrieve the product details associated with the selected order
-                    List<Product> orderProducts = selectedOrder.getOrderItems();
-
-                    // Populate the product table with the products from the selected order
-                    tableOrderProducts.getItems().setAll(orderProducts);
+    private void setupCellFactory() {
+        orderDateTimeColumn.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 }
             }
         });
     }
+
+    private void initializeEventHandlers() {
+        tableOrderHistory.setOnMouseClicked(event -> handleOrderHistoryClick());
+    }
+
+    private void handleOrderHistoryClick() {
+        Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
+        tableOrderProducts.setItems(FXCollections.observableArrayList(selectedOrder != null ? selectedOrder.getOrderItems() : null));
+    }
+
 
     private void loadOrderHistory() {
         List<Order> allOrders = database.getAllOrders();
