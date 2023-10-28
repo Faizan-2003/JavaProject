@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class CreateOrderController {
 
@@ -75,6 +76,8 @@ public class CreateOrderController {
         String phoneNumber = textPhoneNumber.getText();
         String email = textEmail.getText();
 
+        double totalAmount = calculateTotalAmount(new Order());
+
         if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
             labelErrorInformation.setText("Please fill in all the fields.");
         } else {
@@ -85,7 +88,9 @@ public class CreateOrderController {
             order.setPhoneNumber(phoneNumber);
             order.setEmail(email);
             order.setOrderItems(orderItemsList);
+            order.setTotalPrice(totalAmount); // Set the total price
 
+            order.setOrderDateTime(LocalDateTime.now());
             processOrderAndUpdateDatabase(order);
             clearForm();
         }
@@ -99,6 +104,15 @@ public class CreateOrderController {
         orderItemsList.clear();
     }
 
+    private double calculateTotalAmount(Order order) {
+        double totalAmount = 0.0;
+
+        for (OrderItem item : order.getOrderItems()) {
+            totalAmount += item.getPrice() * item.getQuantity();
+        }
+
+        return totalAmount;
+    }
 
     public void processOrderAndUpdateDatabase(Order order) {
         Database database = Database.getInstance();

@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -25,7 +26,6 @@ public class OrderHistoryController {
     private TableColumn<Order, String> customerFirstNameColumn;
     @FXML
     private TableColumn<Order, Double> totalPriceColumn;
-
     @FXML
     private TableView<OrderItem> tableOrderProducts;
     @FXML
@@ -72,20 +72,35 @@ public class OrderHistoryController {
                 }
             };
         });
-
         loadOrderHistory();
     }
-
     private void loadOrderHistory() {
-        // Fetch order history from the database (use the class member database)
         List<Order> allOrders = database.getAllOrders();
 
         if (allOrders != null) {
-            // Create an ObservableList from the retrieved orders
             orderHistory = FXCollections.observableArrayList(allOrders);
 
-            // Set the data in the order history table
+            // Set the data in the order history table and calculate total price
             tableOrderHistory.setItems(orderHistory);
+
+            for (Order order : orderHistory) {
+                double totalAmount = calculateTotalAmount(order);
+                order.setTotalPrice(totalAmount); // Set the total price for the order
+            }
         }
     }
+    private double calculateTotalAmount(Order order) {
+        if (order == null || order.getOrderItems() == null) {
+            return 0.0; // Handle the case where the order or order items are null
+        }
+
+        double totalAmount = 0.0;
+
+        for (OrderItem item : order.getOrderItems()) {
+            totalAmount += item.getPrice() * item.getQuantity();
+        }
+
+        return totalAmount;
+    }
+
 }

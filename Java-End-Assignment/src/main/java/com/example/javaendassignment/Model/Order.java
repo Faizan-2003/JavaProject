@@ -22,7 +22,6 @@ public class Order implements Serializable {
     private String customerEmail;
     private List<OrderItem> orderItems;
     private transient ObservableList<OrderItem> orderItemsList;
-   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     public Order(String customerFirstName, String customerLastName, String customerPhone, String customerEmail) {
         this.customerFirstName = customerFirstName;
@@ -31,19 +30,13 @@ public class Order implements Serializable {
         this.customerEmail = customerEmail;
         this.orderDateTime = LocalDateTime.now();
         this.orderItems = new ArrayList<>();
-        this.totalPrice = calculateTotalPrice();
     }
     public Order() {
         // Initialize any default values if needed
+        this.orderItems = new ArrayList<>();
     }
-
-
-    public double calculateTotalPrice() {
-        double totalPrice = 0.0;
-        for (OrderItem item : orderItems) {
-            totalPrice += item.getPrice() * item.getQuantity();
-        }
-        return totalPrice;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -105,6 +98,7 @@ public class Order implements Serializable {
     public void setOrderItemsList(ObservableList<OrderItem> orderItemsList) {
         this.orderItemsList = orderItemsList;
     }
-
-
+    public void setTotalPrice(double totalAmount) {
+        this.totalPrice = totalAmount;
+    }
 }
