@@ -1,7 +1,6 @@
 package com.example.javaendassignment.Controllers;
 
 import com.example.javaendassignment.Model.Order;
-import com.example.javaendassignment.Model.OrderItem;
 import com.example.javaendassignment.Model.Product;
 import com.example.javaendassignment.Database.Database;
 import javafx.event.ActionEvent;
@@ -23,13 +22,13 @@ import java.time.LocalDateTime;
 public class CreateOrderController {
 
     @FXML
-    private TableColumn<OrderItem, String> nameColumn;
+    private TableColumn<Product, String> nameColumn;
     @FXML
-    private TableColumn<OrderItem, String> categoryColumn;
+    private TableColumn<Product, String> categoryColumn;
     @FXML
-    private TableColumn<OrderItem, Double> priceColumn;
+    private TableColumn<Product, Double> priceColumn;
     @FXML
-    private TableColumn<OrderItem, Integer> quantityColumn;
+    private TableColumn<Product, Integer> quantityColumn;
 
     @FXML
     private Button buttonDeleteProduct;
@@ -48,12 +47,17 @@ public class CreateOrderController {
     @FXML
     private TableView<Order> tableOrderHistory;
     @FXML
-    private TableView<OrderItem> tableProductsCO;
+    private TableView<Product> tableProductsCO;
 
-    private ObservableList<OrderItem> orderItemsList = FXCollections.observableArrayList();
+    private ObservableList<Product> orderItemsList = FXCollections.observableArrayList();
     private ObservableList<Order> orderHistory = FXCollections.observableArrayList();
+    private Database database;
 
     public void initialize() {
+
+        database = Database.getInstance(); // Initialize the database here
+        database.loadDataFromFile();
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -66,7 +70,7 @@ public class CreateOrderController {
         });
     }
 
-    public void addOrderItem(OrderItem orderItem) {
+    public void addOrderItem(Product orderItem) {
         orderItemsList.add(orderItem);
     }
 
@@ -76,7 +80,7 @@ public class CreateOrderController {
         String phoneNumber = textPhoneNumber.getText();
         String email = textEmail.getText();
 
-        double totalAmount = calculateTotalAmount(new Order());
+        double totalAmount = calculateTotalAmount();
 
         if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
             labelErrorInformation.setText("Please fill in all the fields.");
@@ -104,10 +108,10 @@ public class CreateOrderController {
         orderItemsList.clear();
     }
 
-    private double calculateTotalAmount(Order order) {
+    private double calculateTotalAmount() {
         double totalAmount = 0.0;
 
-        for (OrderItem item : order.getOrderItems()) {
+        for (Product item : orderItemsList) {
             totalAmount += item.getPrice() * item.getQuantity();
         }
 
@@ -115,17 +119,16 @@ public class CreateOrderController {
     }
 
     public void processOrderAndUpdateDatabase(Order order) {
-        Database database = Database.getInstance();
+        database = Database.getInstance();
         database.addOrder(order);
 
-        for (OrderItem orderItem : orderItemsList) {
-            Product product = orderItem.getProduct();
-            if (product != null) {
-                int currentStock = product.getStock();
+        for (Product orderItem : orderItemsList) {
+            if (orderItem != null) {
+                int currentStock = orderItem.getStock();
                 int quantitySold = orderItem.getQuantity();
                 if (currentStock >= quantitySold) {
-                    product.setStock(currentStock - quantitySold);
-                    database.updateProduct(product);
+                    orderItem.setStock(currentStock - quantitySold);
+                    database.updateProduct(orderItem);
                 } else {
                     labelErrorInformation.setText("Insufficient stock for product: " + orderItem.getName());
                     return;
@@ -135,10 +138,11 @@ public class CreateOrderController {
     }
 
     public void deleteOrder(ActionEvent actionEvent) {
-        OrderItem selectedItem = tableProductsCO.getSelectionModel().getSelectedItem();
+        Product selectedItem = tableProductsCO.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             orderItemsList.remove(selectedItem);
         }
+        
     }
 
     public void addProducts(ActionEvent actionEvent) {

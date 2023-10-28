@@ -1,7 +1,6 @@
 package com.example.javaendassignment.Controllers;
 
 import com.example.javaendassignment.Database.Database;
-import com.example.javaendassignment.Model.OrderItem;
 import com.example.javaendassignment.Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,39 +13,42 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddProductToOrderController {
     @FXML
     private TextField QuantityTextField;
     @FXML
-    private TableColumn stockColumn;
+    private TableColumn<Product, Integer> stockColumn;
     @FXML
-    private TableColumn nameColumn;
+    private TableColumn<Product, String> nameColumn;
     @FXML
-    private TableColumn categoryColumn;
+    private TableColumn<Product, String> categoryColumn;
     @FXML
-    private TableColumn priceColumn;
+    private TableColumn<Product, Double> priceColumn;
     @FXML
-    private TableColumn descriptionColumn;
+    private TableColumn<Product, String> descriptionColumn;
     @FXML
     private TableView<Product> productTableView;
     @FXML
     private Label labelErrorQuantity;
-    @FXML
-    private TableView<OrderItem> orderTable;
-    private List<OrderItem> orderItems = new ArrayList<>();
+
     private CreateOrderController createOrderController;
+    private Database database;
 
     public void setCreateOrderController(CreateOrderController createOrderController) {
         this.createOrderController = createOrderController;
     }
+
     private Stage stage; // Reference to the stage of the Add Product window
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
     public void initialize() {
+
+        database = Database.getInstance(); // Initialize the database here
+        database.loadDataFromFile();
+
         // Initialize your controller, set up the table view
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -68,9 +70,9 @@ public class AddProductToOrderController {
 
             if (selectedProduct != null) {
                 if (quantity <= selectedProduct.getStock()) {
-                    // Create an OrderItem and add it to the CreateOrderController's list
-                    OrderItem orderItem = new OrderItem(selectedProduct, quantity);
-                    createOrderController.addOrderItem(orderItem);
+                    // Set the quantity and calculate the total price for the selected product
+                    selectedProduct.setQuantity(quantity);
+                    createOrderController.addOrderItem(selectedProduct); // Send the selected product to CreateOrderController
 
                     // Clear the QuantityTextField
                     QuantityTextField.clear();
@@ -83,7 +85,6 @@ public class AddProductToOrderController {
             labelErrorQuantity.setText("Please enter a valid quantity.");
         }
     }
-
 
     public void goBackToCreateOrder(ActionEvent actionEvent) {
         stage.close();

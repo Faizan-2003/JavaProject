@@ -31,8 +31,12 @@ public class InventoryController {
     private TableColumn priceColumn;
     @FXML
     private TableColumn descriptionColumn;
+    private Database database;
 
     public void initialize() {
+        database = Database.getInstance();
+        database.loadDataFromFile();
+
         // Initialize the table columns
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -48,9 +52,8 @@ public class InventoryController {
 
         // Set the data to the table
         tableProductsInventory.getItems().setAll(products);
+
     }
-
-
 
     public void openAddProductWindow(ActionEvent actionEvent) {
         try {
@@ -76,7 +79,10 @@ public class InventoryController {
     }
 
     public void addProductToTable(Product product) {
-      tableProductsInventory.getItems().add(product);
+
+        tableProductsInventory.getItems().add(product);
+        database.saveDataToFile();
+
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
@@ -90,6 +96,7 @@ public class InventoryController {
             // Remove the product from the database
             Database.getInstance().deleteProduct(selectedProduct);
         }
+        database.saveDataToFile();
     }
 
     public void editProduct(ActionEvent actionEvent) {

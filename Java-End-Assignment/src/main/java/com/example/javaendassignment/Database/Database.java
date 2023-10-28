@@ -1,13 +1,16 @@
 package com.example.javaendassignment.Database;
 
-import com.example.javaendassignment.Model.*;
-import java.util.Collections;
+import com.example.javaendassignment.Model.Product;
+import com.example.javaendassignment.Model.Order;
+import com.example.javaendassignment.Model.User;
+import com.example.javaendassignment.Model.UserRole;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 public class Database {
     private static Map<String, User> users = new HashMap<>();
@@ -15,17 +18,20 @@ public class Database {
     private static Map<String, Order> orders = new HashMap<>();
     private final String dataFileName = "applicationData.dat";
     private static Database instance;
+
     public Map<String, Product> getProducts() {
         return products;
     }
+
     public static Database getInstance() {
         if (instance == null) {
             instance = new Database();
         }
         return instance;
     }
+
     public Database() {
-        loadDataFromFile();
+
         // Initialize the database with sample data
         users.put("faizan", new User("Muhammad Faizan", UserRole.manager, "Faizan@321"));
         users.put("tommy", new User("Tommy Shelby", UserRole.salesperson, "Tommy@123"));
@@ -87,6 +93,7 @@ public class Database {
         // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
         saveDataToFile();
     }
+
     public void updateProduct(Product updatedProduct) {
         // Check if the product exists in the database
         if (products.containsKey(updatedProduct.getName())) {
@@ -97,6 +104,7 @@ public class Database {
             saveDataToFile();
         }
     }
+
     public void deleteProduct(Product product) {
         // Remove the product from the database
         products.remove(product.getName());
@@ -125,13 +133,16 @@ public class Database {
         return orders.get(customerEmail);
     }
 
-    public List<OrderItem> getOrderProducts(Order order) {
+    public List<Product> getOrderProducts(Order order) {
         if (order != null) {
-            return order.getOrderItems(); // Assuming 'getOrderItems' is a method in the Order class that returns the list of order items
+            List<Product> orderProducts = new ArrayList<>();
+            for (Product product : products.values()) {
+                if (order.getOrderItems().contains(product.getName())) {
+                    orderProducts.add(product);
+                }
+            }
+            return orderProducts;
         }
         return Collections.emptyList(); // Return an empty list if the order is null
     }
-
-
 }
-

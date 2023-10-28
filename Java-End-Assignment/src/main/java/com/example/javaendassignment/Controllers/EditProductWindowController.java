@@ -22,6 +22,7 @@ public class EditProductWindowController {
     private Stage stage; // Reference to the stage of the Edit Product window
     private InventoryController inventoryController;
     private Product productToEdit; // The product to be edited
+    private Database database;
 
     public void setProductToEdit(Product product) {
         this.productToEdit = product;
@@ -62,7 +63,6 @@ public class EditProductWindowController {
 
             // Save the data to a file
             Database.getInstance().saveDataToFile();
-
             // Close the Edit Product window
             stage.close();
         }
