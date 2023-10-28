@@ -13,9 +13,9 @@
       </Label>
       <TableView fx:id="tableOrderHistory" layoutX="25.0" layoutY="54.0" prefHeight="200.0" prefWidth="673.0">
         <columns>
-          <TableColumn prefWidth="116.33332824707031" text="Date/time" />
-          <TableColumn prefWidth="331.6666564941406" text="Name" />
-            <TableColumn prefWidth="129.0" text="Total price" />
+          <TableColumn fx:id="orderDateTimeColumn" prefWidth="116.33332824707031" text="Date/time &amp; Time" />
+          <TableColumn fx:id="customerFirstNameColumn" prefWidth="331.6666564941406" text="Name" />
+            <TableColumn fx:id="totalPriceColumn" prefWidth="129.0" text="Total price" />
             <TableColumn prefWidth="95.99996948242188" />
         </columns>
       </TableView>
@@ -26,11 +26,11 @@
       </Label>
       <TableView fx:id="tableOrderProducts" layoutX="25.0" layoutY="303.0" prefHeight="200.0" prefWidth="673.0">
          <columns>
-            <TableColumn prefWidth="78.66667175292969" text="Quantity" />
-            <TableColumn prefWidth="300.0" text="Name" />
-            <TableColumn minWidth="0.0" prefWidth="154.66668701171875" text="Category" />
-            <TableColumn minWidth="0.0" prefWidth="78.0" text="Price" />
-            <TableColumn prefWidth="216.66668701171875" />
+            <TableColumn fx:id="quantityColumn" prefWidth="78.66667175292969" text="Quantity" />
+            <TableColumn fx:id="nameColumn" prefWidth="300.0" text="Name" />
+            <TableColumn fx:id="categoryColumn" minWidth="0.0" prefWidth="154.66668701171875" text="Category" />
+            <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="89.0" text="Price" />
+            <TableColumn prefWidth="206.33331298828125" />
          </columns>
       </TableView>
    </children>

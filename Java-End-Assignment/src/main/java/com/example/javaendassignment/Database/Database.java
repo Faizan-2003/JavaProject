@@ -1,9 +1,7 @@
 package com.example.javaendassignment.Database;
 
-import com.example.javaendassignment.Model.Order;
-import com.example.javaendassignment.Model.Product;
-import com.example.javaendassignment.Model.User;
-import com.example.javaendassignment.Model.UserRole;
+import com.example.javaendassignment.Model.*;
+import java.util.Collections;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -107,4 +105,33 @@ public class Database {
         saveDataToFile();
     }
 
+    public void addOrder(Order order) {
+        // Add the order to your orders map
+        orders.put(order.getCustomerEmail(), order);
+
+        // Optionally, you can call your saveDataToFile method to save the updated data to the.dat file
+        saveDataToFile();
+    }
+
+    public Map<String, Order> getOrders() {
+        return orders;
+    }
+
+    public List<Order> getAllOrders() {
+        return new ArrayList<>(orders.values());
+    }
+
+    public Order getOrder(String customerEmail) {
+        return orders.get(customerEmail);
+    }
+
+    public List<OrderItem> getOrderProducts(Order order) {
+        if (order != null) {
+            return order.getOrderItems(); // Assuming 'getOrderItems' is a method in the Order class that returns the list of order items
+        }
+        return Collections.emptyList(); // Return an empty list if the order is null
+    }
+
+
 }
+

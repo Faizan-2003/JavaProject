@@ -102,7 +102,7 @@ public class LoginController {
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Scene scene = new Scene(root);
-            stage.setTitle("Dashboard");
+            stage.setTitle("Faizan's Music Shop");
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

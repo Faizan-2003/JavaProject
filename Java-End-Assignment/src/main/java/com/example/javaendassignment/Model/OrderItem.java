@@ -1,6 +1,8 @@
 package com.example.javaendassignment.Model;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
     private Product product;
     private int quantity;
 
@@ -23,5 +25,9 @@ public class OrderItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

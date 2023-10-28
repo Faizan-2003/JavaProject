@@ -1,38 +1,93 @@
 package com.example.javaendassignment.Model;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable {
+   private static final long serialVersionUID = 357439316648153333L;
+
+    private LocalDateTime orderDateTime;
+    private double totalPrice;
     private String customerFirstName;
     private String customerLastName;
     private String customerPhone;
     private String customerEmail;
-    private List<OrderedProduct> orderedProducts; // A list of products in the order
+    private List<OrderItem> orderItems;
+    private transient ObservableList<OrderItem> orderItemsList;
+   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     public Order(String customerFirstName, String customerLastName, String customerPhone, String customerEmail) {
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
         this.customerPhone = customerPhone;
         this.customerEmail = customerEmail;
-        this.orderedProducts = new ArrayList<>();
+        this.orderDateTime = LocalDateTime.now();
+        this.orderItems = new ArrayList<>();
+        this.totalPrice = calculateTotalPrice();
+    }
+    public Order() {
+        // Initialize any default values if needed
     }
 
+
+    public double calculateTotalPrice() {
+        double totalPrice = 0.0;
+        for (OrderItem item : orderItems) {
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        return totalPrice;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setOrderItems(ObservableList<OrderItem> orderItemsList) {
+        this.orderItemsList = orderItemsList;
+    }
+
+    public void setFirstName(String firstName) {
+        this.customerFirstName = firstName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.customerPhone = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.customerEmail = email;
+    }
+    public void setLastName(String lastName) {
+        this.customerLastName = lastName;
+    }
     public String getCustomerFirstName() {
         return customerFirstName;
     }
-
-    public void setCustomerFirstName(String customerFirstName) {
-        this.customerFirstName = customerFirstName;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public String getCustomerLastName() {
-        return customerLastName;
+  public String getCustomerLastName() {
+    return customerLastName;
+    }
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
     }
 
-    public void setCustomerLastName(String customerLastName) {
-        this.customerLastName = customerLastName;
+    public void setOrderDateTime(LocalDateTime orderDateTime) {
+        this.orderDateTime = orderDateTime;
     }
 
     public String getCustomerPhone() {
@@ -43,39 +98,13 @@ public class Order implements Serializable {
         this.customerPhone = customerPhone;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public ObservableList<OrderItem> getOrderItemsList() {
+        return orderItemsList;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setOrderItemsList(ObservableList<OrderItem> orderItemsList) {
+        this.orderItemsList = orderItemsList;
     }
 
-    public List<OrderedProduct> getOrderedProducts() {
-        return orderedProducts;
-    }
 
-    public void addProductToOrder(Product product, int quantity) {
-        OrderedProduct orderedProduct = new OrderedProduct(product, quantity);
-        orderedProducts.add(orderedProduct);
-    }
-
-    // A class to represent products within the order
-    public static class OrderedProduct {
-        private Product product;
-        private int quantity;
-
-        public OrderedProduct(Product product, int quantity) {
-            this.product = product;
-            this.quantity = quantity;
-        }
-
-        public Product getProduct() {
-            return product;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-    }
 }

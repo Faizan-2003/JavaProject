@@ -69,7 +69,7 @@ public class MainWindowController {
 
             // Set the new scene
             Scene scene = new Scene(root);
-            stage.setTitle("Dashboard");
+            stage.setTitle("Faizan's Music Shop");
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

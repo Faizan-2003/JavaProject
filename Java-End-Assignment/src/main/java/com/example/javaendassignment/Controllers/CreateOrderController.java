@@ -1,34 +1,34 @@
 package com.example.javaendassignment.Controllers;
 
+import com.example.javaendassignment.Model.Order;
 import com.example.javaendassignment.Model.OrderItem;
+import com.example.javaendassignment.Model.Product;
+import com.example.javaendassignment.Database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import javafx.fxml.FXMLLoader;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateOrderController {
+
     @FXML
-    private TableColumn quantityColumn;
+    private TableColumn<OrderItem, String> nameColumn;
     @FXML
-    private TableColumn nameColumn;
+    private TableColumn<OrderItem, String> categoryColumn;
     @FXML
-    private TableColumn categoryColumn;
+    private TableColumn<OrderItem, Double> priceColumn;
     @FXML
-    private TableColumn priceColumn;
+    private TableColumn<OrderItem, Integer> quantityColumn;
 
     @FXML
     private Button buttonDeleteProduct;
@@ -37,73 +37,106 @@ public class CreateOrderController {
     @FXML
     private TextField textPhoneNumber;
     @FXML
-    private TextField textEmailAddress;
-
+    private TextField textEmail;
     @FXML
     private TextField textLastName;
-
+    @FXML
+    private Label labelErrorInformation;
+    @FXML
+    private Label labelOrderCreated;
+    @FXML
+    private TableView<Order> tableOrderHistory;
     @FXML
     private TableView<OrderItem> tableProductsCO;
-    private List<OrderItem> orderItems = new ArrayList<>();
-    private ObservableList<OrderItem> orderItemsList = FXCollections.observableArrayList();
 
-    public void setOrderTable(TableView<OrderItem> tableProductsCO) {
-        this.tableProductsCO = tableProductsCO;
-    }
+    private ObservableList<OrderItem> orderItemsList = FXCollections.observableArrayList();
+    private ObservableList<Order> orderHistory = FXCollections.observableArrayList();
 
     public void initialize() {
-        tableProductsCO.setItems(orderItemsList);
-
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+        tableProductsCO.setItems(orderItemsList);
 
         tableProductsCO.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                buttonDeleteProduct.setDisable(false);
-            } else {
-                buttonDeleteProduct.setDisable(true);
-            }
+            buttonDeleteProduct.setDisable(newSelection == null);
         });
     }
+
     public void addOrderItem(OrderItem orderItem) {
         orderItemsList.add(orderItem);
     }
 
     public void createOrder(ActionEvent actionEvent) {
-        // Here, you can access the orderItems list to create the order.
-        // You can also access other text fields like textFirstName, textLastName, etc.
+        String firstName = textFirstName.getText();
+        String lastName = textLastName.getText();
+        String phoneNumber = textPhoneNumber.getText();
+        String email = textEmail.getText();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+            labelErrorInformation.setText("Please fill in all the fields.");
+        } else {
+            labelErrorInformation.setText("");
+            Order order = new Order();
+            order.setFirstName(firstName);
+            order.setLastName(lastName);
+            order.setPhoneNumber(phoneNumber);
+            order.setEmail(email);
+            order.setOrderItems(orderItemsList);
+
+            processOrderAndUpdateDatabase(order);
+            clearForm();
+        }
+    }
+
+    private void clearForm() {
+        textFirstName.clear();
+        textLastName.clear();
+        textPhoneNumber.clear();
+        textEmail.clear();
+        orderItemsList.clear();
+    }
+
+
+    public void processOrderAndUpdateDatabase(Order order) {
+        Database database = Database.getInstance();
+        database.addOrder(order);
+
+        for (OrderItem orderItem : orderItemsList) {
+            Product product = orderItem.getProduct();
+            if (product != null) {
+                int currentStock = product.getStock();
+                int quantitySold = orderItem.getQuantity();
+                if (currentStock >= quantitySold) {
+                    product.setStock(currentStock - quantitySold);
+                    database.updateProduct(product);
+                } else {
+                    labelErrorInformation.setText("Insufficient stock for product: " + orderItem.getName());
+                    return;
+                }
+            }
+        }
     }
 
     public void deleteOrder(ActionEvent actionEvent) {
-        // Get the selected item from the TableView
         OrderItem selectedItem = tableProductsCO.getSelectionModel().getSelectedItem();
-
         if (selectedItem != null) {
-            // Remove the selected item from the orderItemsList
             orderItemsList.remove(selectedItem);
         }
     }
 
     public void addProducts(ActionEvent actionEvent) {
         try {
-            // Load the AddProductToOrderWindow.fxml file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/Add-Product.fxml"));
             Parent root = loader.load();
-
-            // Create a new stage for the "Add Product to Order" window
             Stage addProductToOrderStage = new Stage();
             addProductToOrderStage.setTitle("Add Product to Order");
             addProductToOrderStage.setScene(new Scene(root));
-
-            // Set the controller for the "Add Product to Order" window
             AddProductToOrderController addProductToOrderController = loader.getController();
             addProductToOrderController.setStage(addProductToOrderStage);
-            addProductToOrderController.setCreateOrderController(this); // Pass a reference to this controller
-
-            // Show the "Add Product to Order" window
+            addProductToOrderController.setCreateOrderController(this);
             addProductToOrderStage.show();
         } catch (IOException e) {
             e.printStackTrace();
