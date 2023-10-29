@@ -34,28 +34,22 @@ public class MainWindowController {
         this.database = database;
     }
 
-    // Other fields as before...
 
     public void setUserData(String userName, String userRole, String dateTime) {
         labelWelcome.setText("Welcome " + userName + "!");
         labelRole.setText("Your role is: " + userRole);
         labelDateTime.setText("It is now: " + dateTime);
 
-        // Set the values in the fields so they can be used when needed
         this.userName = userName;
         this.userRole = userRole;
         this.dateTime = dateTime;
     }
 
     public void goToDashboard(ActionEvent actionEvent) {
-        // Get the reference to the Dashboard button's Scene and Stage
         Stage stage = (Stage) buttonDashboard.getScene().getWindow();
 
-        // Load the MainWindow view and set user data
         openMainWindow(userName, stage);
     }
-
-    // The rest of your code...
 
     private void openMainWindow(String username, Stage stage) {
         try {
@@ -64,10 +58,8 @@ public class MainWindowController {
 
             MainWindowController mainWindowController = loader.getController();
 
-            // Pass the values to MainWindowController
             mainWindowController.setUserData(userName, userRole, dateTime);
 
-            // Set the new scene
             Scene scene = new Scene(root);
             stage.setTitle("Faizan's Music Shop");
             stage.setScene(scene);
@@ -100,7 +92,6 @@ public class MainWindowController {
             emptyPanel.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
-            // Add more detailed logging or handle the exception as needed
         }
     }
 

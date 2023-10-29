@@ -19,10 +19,9 @@ public class EditProductWindowController {
     @FXML
     private TextField textDescriptionAP;
 
-    private Stage stage; // Reference to the stage of the Edit Product window
+    private Stage stage;
     private InventoryController inventoryController;
-    private Product productToEdit; // The product to be edited
-    private Database database;
+    private Product productToEdit;
 
     public void setProductToEdit(Product product) {
         this.productToEdit = product;
@@ -48,22 +47,19 @@ public class EditProductWindowController {
             double price = Double.parseDouble(textPriceAP.getText());
             String description = textDescriptionAP.getText();
 
-            // Update the selected product with the edited data
             productToEdit.setStock(stock);
             productToEdit.setName(name);
             productToEdit.setCategory(category);
             productToEdit.setPrice(price);
             productToEdit.setDescription(description);
 
-            // Update the table view in InventoryController
+
             inventoryController.updateProductInTable(productToEdit);
 
-            // Update the product in the database
             Database.getInstance().updateProduct(productToEdit);
 
-            // Save the data to a file
             Database.getInstance().saveDataToFile();
-            // Close the Edit Product window
+
             stage.close();
         }
     }

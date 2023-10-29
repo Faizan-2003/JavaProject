@@ -15,16 +15,13 @@ public class MusicApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Create a new instance of the database
         Database database = new Database();
 
-        // Load the Login screen with a specific size
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent loginRoot = loginLoader.load();
         LoginController loginController = loginLoader.getController();
         loginController.initialize(database);
 
-        // Set up the initial scene to display the Login screen
         Scene loginScene = new Scene(loginRoot);
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("Login");

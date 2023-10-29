@@ -32,7 +32,6 @@ public class Database {
 
     public Database() {
 
-        // Initialize the database with sample data
         users.put("faizan", new User("Muhammad Faizan", UserRole.manager, "Faizan@321"));
         users.put("tommy", new User("Tommy Shelby", UserRole.salesperson, "Tommy@123"));
     }
@@ -42,7 +41,7 @@ public class Database {
         if (user != null) {
             return user.getRole();
         } else {
-            return null; // Return null or a default role when the user is not found
+            return null;
         }
     }
 
@@ -51,7 +50,7 @@ public class Database {
         if (user != null) {
             return user.getFullName();
         }
-        return null; // Return null
+        return null;
     }
 
     public boolean isValidUser(String username, String password) {
@@ -82,48 +81,40 @@ public class Database {
             products.putAll(applicationData.getProducts());
             orders.putAll(applicationData.getOrders());
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace(); // Print the exception for debugging
+            e.printStackTrace();
             System.out.println("Error loading data from file: " + e.getMessage());
         }
     }
     public void addProduct(Product product) {
         // Add the product to your products map
         products.put(product.getName(), product);
-
-        // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
         saveDataToFile();
     }
 
     public void updateProduct(Product updatedProduct) {
-        // Check if the product exists in the database
         if (products.containsKey(updatedProduct.getName())) {
-            // Update the product in the database
+
             products.put(updatedProduct.getName(), updatedProduct);
 
-            // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
             saveDataToFile();
         }
     }
 
     public void deleteProduct(Product product) {
-        // Remove the product from the database
+
         products.remove(product.getName());
 
-        // Optionally, you can call your saveDataToFile method to save the updated data to the .dat file
         saveDataToFile();
     }
 
     public void addOrder(Order order) {
-        // Add the order to your orders map
+
         orders.put(order.getCustomerEmail(), order);
 
-        // Optionally, you can call your saveDataToFile method to save the updated data to the.dat file
+
         saveDataToFile();
     }
 
-    public Map<String, Order> getOrders() {
-        return orders;
-    }
 
     public List<Order> getAllOrders() {
         return new ArrayList<>(orders.values());
@@ -133,16 +124,4 @@ public class Database {
         return orders.get(customerEmail);
     }
 
-    public List<Product> getOrderProducts(Order order) {
-        if (order != null) {
-            List<Product> orderProducts = new ArrayList<>();
-            for (Product product : products.values()) {
-                if (order.getOrderItems().contains(product.getName())) {
-                    orderProducts.add(product);
-                }
-            }
-            return orderProducts;
-        }
-        return Collections.emptyList(); // Return an empty list if the order is null
-    }
 }

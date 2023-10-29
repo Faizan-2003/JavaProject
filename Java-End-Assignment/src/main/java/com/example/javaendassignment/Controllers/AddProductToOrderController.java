@@ -38,7 +38,7 @@ public class AddProductToOrderController {
         this.createOrderController = createOrderController;
     }
 
-    private Stage stage; // Reference to the stage of the Add Product window
+    private Stage stage;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -46,20 +46,17 @@ public class AddProductToOrderController {
 
     public void initialize() {
 
-        database = Database.getInstance(); // Initialize the database here
+        database = Database.getInstance();
         database.loadDataFromFile();
 
-        // Initialize your controller, set up the table view
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        // Retrieve products from the database
         ObservableList<Product> products = FXCollections.observableArrayList(Database.getInstance().getProducts().values());
 
-        // Set the products in the TableView
         productTableView.setItems(products);
     }
 
@@ -70,13 +67,12 @@ public class AddProductToOrderController {
 
             if (selectedProduct != null) {
                 if (quantity <= selectedProduct.getStock()) {
-                    // Set the quantity and calculate the total price for the selected product
-                    selectedProduct.setQuantity(quantity);
-                    createOrderController.addOrderItem(selectedProduct); // Send the selected product to CreateOrderController
 
-                    // Clear the QuantityTextField
+                    selectedProduct.setQuantity(quantity);
+                    createOrderController.addOrderItem(selectedProduct);
+
                     QuantityTextField.clear();
-                    labelErrorQuantity.setText(""); // Clear any previous error message
+                    labelErrorQuantity.setText("");
                 } else {
                     labelErrorQuantity.setText("Not enough stock available.");
                 }

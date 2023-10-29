@@ -36,7 +36,7 @@ public class OrderHistoryController {
     @FXML
     private TableColumn<Product, Double> priceColumn;
 
-    private Database database; // Declare a member variable for the database
+    private Database database;
     private ObservableList<Order> orderHistory;
     private ObservableList<Product> orderProducts;
 
@@ -94,7 +94,6 @@ public class OrderHistoryController {
         if (allOrders != null) {
             orderHistory = FXCollections.observableArrayList(allOrders);
 
-            // Set the data in the order history table and calculate total price
             tableOrderHistory.setItems(orderHistory);
 
             for (Order order : orderHistory) {
@@ -105,7 +104,7 @@ public class OrderHistoryController {
 
                     for (Product product : orderProducts) {
                         double totalAmount = calculateTotalAmount(product);
-                        product.setTotalPrice(totalAmount); // Set the total price for the product
+                        product.setTotalPrice(totalAmount);
                     }
 
                     // Set the order products data
@@ -118,7 +117,7 @@ public class OrderHistoryController {
 
     private double calculateTotalAmount(Product product) {
         if (product == null) {
-            return 0.0; // Handle the case where the product is null
+            return 0.0;
         }
 
         return product.getTotalPrice();
@@ -128,10 +127,8 @@ public class OrderHistoryController {
         Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
 
         if (selectedOrder != null) {
-            // Retrieve the product details associated with the selected order
             List<Product> orderProducts = selectedOrder.getOrderItems();
 
-            // Populate the productDetailsTable with the products from the selected order
             tableOrderProducts.getItems().setAll(orderProducts);
         }
     }

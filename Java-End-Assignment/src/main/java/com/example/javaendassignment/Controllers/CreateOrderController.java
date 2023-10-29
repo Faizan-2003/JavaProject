@@ -45,17 +45,14 @@ public class CreateOrderController {
     @FXML
     private Label labelOrderCreated;
     @FXML
-    private TableView<Order> tableOrderHistory;
-    @FXML
     private TableView<Product> tableProductsCO;
 
     private ObservableList<Product> orderItemsList = FXCollections.observableArrayList();
-    private ObservableList<Order> orderHistory = FXCollections.observableArrayList();
     private Database database;
 
     public void initialize() {
 
-        database = Database.getInstance(); // Initialize the database here
+        database = Database.getInstance();
         database.loadDataFromFile();
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -92,12 +89,13 @@ public class CreateOrderController {
             order.setPhoneNumber(phoneNumber);
             order.setEmail(email);
             order.setOrderItems(orderItemsList);
-            order.setTotalPrice(totalAmount); // Set the total price
+            order.setTotalPrice(totalAmount);
 
             order.setOrderDateTime(LocalDateTime.now());
             processOrderAndUpdateDatabase(order);
             clearForm();
         }
+        labelOrderCreated.setText("Order created successfully!");
     }
 
     private void clearForm() {

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.javaendassignment.Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +20,7 @@ public class Order implements Serializable {
     private String customerLastName;
     private String customerPhone;
     private String customerEmail;
-    private transient ObservableList<Product> orderItems; // Mark as transient
+    private transient ObservableList<Product> orderItems;
 
     public Order(String customerFirstName, String customerLastName, String customerPhone, String customerEmail) {
         this.customerFirstName = customerFirstName;
@@ -29,29 +28,25 @@ public class Order implements Serializable {
         this.customerPhone = customerPhone;
         this.customerEmail = customerEmail;
         this.orderDateTime = LocalDateTime.now();
-        this.orderItems = FXCollections.observableArrayList(); // Initialize as an empty ObservableList
+        this.orderItems = FXCollections.observableArrayList();
     }
 
-    // Other constructors and methods...
-
-    // Add these custom serialization methods
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        out.writeObject(orderDateTime.toString()); // Serialize LocalDateTime as a String
+        out.writeObject(orderDateTime.toString());
         List<Product> productList = new ArrayList<>(orderItems);
-        out.writeObject(productList); // Serialize the List of Products
+        out.writeObject(productList);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        orderDateTime = LocalDateTime.parse((String) in.readObject()); // Deserialize LocalDateTime from the String
-        List<Product> productList = (List<Product>) in.readObject(); // Deserialize the List of Products
-        orderItems = FXCollections.observableArrayList(productList); // Convert the List back to an ObservableList
+        orderDateTime = LocalDateTime.parse((String) in.readObject());
+        List<Product> productList = (List<Product>) in.readObject();
+        orderItems = FXCollections.observableArrayList(productList);
     }
 
     public Order() {
-        // Initialize any default values if needed
-        this.orderItems = FXCollections.observableArrayList(); // Initialize as an empty ObservableList
+        this.orderItems = FXCollections.observableArrayList();
     }
 
     public void setOrderItems(List<Product> orderItems) {
@@ -85,19 +80,15 @@ public class Order implements Serializable {
     public String getCustomerFirstName() {
         return customerFirstName;
     }
-
     public double getTotalPrice() {
         return totalPrice;
     }
-
     public String getCustomerLastName() {
         return customerLastName;
     }
-
     public LocalDateTime getOrderDateTime() {
         return orderDateTime;
     }
-
     public void setOrderDateTime(LocalDateTime orderDateTime) {
         this.orderDateTime = orderDateTime;
     }
@@ -105,12 +96,9 @@ public class Order implements Serializable {
     public String getCustomerPhone() {
         return customerPhone;
     }
-
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
-
-    // Assuming you want to set the total price
     public void setTotalPrice(double totalAmount) {
         this.totalPrice = totalAmount;
     }

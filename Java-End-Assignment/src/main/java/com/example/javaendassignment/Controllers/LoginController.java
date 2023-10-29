@@ -32,14 +32,11 @@ public class LoginController {
 
     public void initialize(Database database) {
         this.database = database;
-        // Disable the login button initially
+
         loginButton.setDisable(true);
 
-        // Listen for changes in the passwordField text
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Check if the password meets the criteria
             boolean isValidPassword = isPasswordValid(newValue);
-            // Enable the login button if the password is valid
             loginButton.setDisable(!isValidPassword);
         });
     }
@@ -62,8 +59,7 @@ public class LoginController {
                 return true; // Password is valid
             }
         }
-
-        return false; // Password does not meet all criteria
+        return false;
     }
 
     @FXML
@@ -72,10 +68,8 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (database.isValidUser(username, password)) {
-            // User is authenticated, open the main window
             openMainWindow(username);
         } else {
-            // Invalid credentials, display an error message in red color
             ErrorMessage.setText("Invalid username or password");
         }
     }
@@ -87,17 +81,14 @@ public class LoginController {
 
             MainWindowController mainWindowController = loader.getController();
 
-            // Pass the database object to the MainWindowController
             mainWindowController.initialize(database);
 
-            // Set the user's name, role, and date/time
             String userRole = String.valueOf(database.getUserRole(username));
             String userName = database.getUserFullName(username);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date now = new Date();
             String dateTime = dateFormat.format(now);
 
-            // Pass the values to MainWindowController
             mainWindowController.setUserData(userName, userRole, dateTime);
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
