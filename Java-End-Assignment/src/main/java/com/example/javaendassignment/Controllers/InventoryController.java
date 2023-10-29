@@ -37,20 +37,14 @@ public class InventoryController {
         database = Database.getInstance();
         database.loadDataFromFile();
 
-        // Initialize the table columns
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        // Access the products from the Database class
         Map<String, Product> productMap = Database.getInstance().getProducts();
-
-        // Convert the product map to a list of products
         List<Product> products = new ArrayList<>(productMap.values());
-
-        // Set the data to the table
         tableProductsInventory.getItems().setAll(products);
 
     }
@@ -66,7 +60,7 @@ public class InventoryController {
 
             AddProductWindowController addProductController = loader.getController();
             addProductController.setStage(addProductStage);
-            addProductController.setInventoryController(this); // Pass the InventoryController reference
+            addProductController.setInventoryController(this);
 
             addProductStage.show();
         } catch (IOException e) {
@@ -75,7 +69,6 @@ public class InventoryController {
     }
 
     public void addProductToTable(Product product) {
-
         tableProductsInventory.getItems().add(product);
         database.saveDataToFile();
 
@@ -84,10 +77,8 @@ public class InventoryController {
     public void deleteProduct(ActionEvent actionEvent) {
 
         Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
-
         if (selectedProduct != null) {
             tableProductsInventory.getItems().remove(selectedProduct);
-
             Database.getInstance().deleteProduct(selectedProduct);
         }
         database.saveDataToFile();

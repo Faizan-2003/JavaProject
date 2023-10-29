@@ -78,9 +78,7 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/MainDashboard.fxml"));
             Parent root = loader.load();
-
             MainDashboardController mainWindowController = loader.getController();
-
             mainWindowController.initialize(database);
 
             UserRole userRole = UserRole.valueOf(String.valueOf(database.getUserRole(username)));
@@ -99,5 +97,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 }

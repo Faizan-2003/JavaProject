@@ -88,32 +88,24 @@ public class Database {
         }
     }
     public void addProduct(Product product) {
-        // Add the product to your products map
         products.put(product.getName(), product);
         saveDataToFile();
     }
 
     public void updateProduct(Product updatedProduct) {
         if (products.containsKey(updatedProduct.getName())) {
-
             products.put(updatedProduct.getName(), updatedProduct);
-
             saveDataToFile();
         }
     }
 
     public void deleteProduct(Product product) {
-
         products.remove(product.getName());
-
         saveDataToFile();
     }
 
     public void addOrder(Order order) {
-
         orders.put(order.getCustomerEmail(), order);
-
-
         saveDataToFile();
     }
 

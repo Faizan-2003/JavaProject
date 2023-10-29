@@ -70,7 +70,6 @@ public class AddProductToOrderController {
 
                     selectedProduct.setQuantity(quantity);
                     createOrderController.addOrderItem(selectedProduct);
-
                     QuantityTextField.clear();
                     labelErrorQuantity.setText("");
                 } else {

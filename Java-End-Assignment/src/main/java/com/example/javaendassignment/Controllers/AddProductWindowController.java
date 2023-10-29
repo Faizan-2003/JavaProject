@@ -31,7 +31,6 @@ public class AddProductWindowController {
     }
 
     public void goBackToInventory(ActionEvent actionEvent) {
-
         stage.close();
     }
 
@@ -43,15 +42,12 @@ public class AddProductWindowController {
     double price = Double.parseDouble(textPriceAP.getText());
     String description = textDescriptionAP.getText();
 
-
     Product newProduct = new Product(stock, name, category, price, description);
 
     inventoryController.addProductToTable(newProduct);
 
     Database.getInstance().addProduct(newProduct);
-
     Database.getInstance().saveDataToFile();
-
     stage.close();
     }
 }

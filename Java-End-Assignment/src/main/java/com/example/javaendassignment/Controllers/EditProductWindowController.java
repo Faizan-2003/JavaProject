@@ -53,13 +53,9 @@ public class EditProductWindowController {
             productToEdit.setPrice(price);
             productToEdit.setDescription(description);
 
-
             inventoryController.updateProductInTable(productToEdit);
-
             Database.getInstance().updateProduct(productToEdit);
-
             Database.getInstance().saveDataToFile();
-
             stage.close();
         }
     }

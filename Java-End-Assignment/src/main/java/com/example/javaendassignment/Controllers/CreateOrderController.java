@@ -61,7 +61,6 @@ public class CreateOrderController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         tableProductsCO.setItems(orderItemsList);
-
         tableProductsCO.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             buttonDeleteProduct.setDisable(newSelection == null);
         });
@@ -76,7 +75,6 @@ public class CreateOrderController {
         String lastName = textLastName.getText();
         String phoneNumber = textPhoneNumber.getText();
         String email = textEmail.getText();
-
         double totalAmount = calculateTotalAmount();
 
         if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
@@ -90,7 +88,6 @@ public class CreateOrderController {
             order.setEmail(email);
             order.setOrderItems(orderItemsList);
             order.setTotalPrice(totalAmount);
-
             order.setOrderDateTime(LocalDateTime.now());
             processOrderAndUpdateDatabase(order);
             clearForm();
