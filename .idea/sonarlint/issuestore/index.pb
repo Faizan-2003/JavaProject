@@ -43,3 +43,7 @@ lJava-End-Assignment/src/main/java/com/example/javaendassignment/Controllers/Add
 hJava-End-Assignment/src/main/java/com/example/javaendassignment/Controllers/MainDashboardController.java,7\e\7e9fd589550cbcf3a6db41a3b73a309b337f2718
 W
 'Java-End-Assignment/applicationData.dat,9\e\9e465d86a5e799c90da51a24415cca4e8175c14f
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
