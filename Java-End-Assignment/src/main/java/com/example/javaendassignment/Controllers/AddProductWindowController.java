@@ -4,6 +4,7 @@ import com.example.javaendassignment.Database.Database;
 import com.example.javaendassignment.Model.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,6 +19,8 @@ public class AddProductWindowController {
     private TextField textNameAP;
     @FXML
     private TextField textStockAP;
+    @FXML
+    private Label labelFieldError;
 
     private Stage stage;
     private InventoryController inventoryController;
@@ -36,18 +39,23 @@ public class AddProductWindowController {
 
   public void saveTheProduct(ActionEvent actionEvent) {
 
-    int stock = Integer.parseInt(textStockAP.getText());
-    String name = textNameAP.getText();
-    String category = textCategoryAP.getText();
-    double price = Double.parseDouble(textPriceAP.getText());
-    String description = textDescriptionAP.getText();
+  if(textStockAP.getText().isEmpty() || textNameAP.getText().isEmpty() || textCategoryAP.getText().isEmpty() || textPriceAP.getText().isEmpty() || textDescriptionAP.getText().isEmpty()){
+  labelFieldError.setText("Please fill in all the fields!");
 
-    Product newProduct = new Product(stock, name, category, price, description);
+  } else {
+      int stock = Integer.parseInt(textStockAP.getText());
+      String name = textNameAP.getText();
+      String category = textCategoryAP.getText();
+      double price = Double.parseDouble(textPriceAP.getText());
+      String description = textDescriptionAP.getText();
 
-    inventoryController.addProductToTable(newProduct);
+      Product newProduct = new Product(stock, name, category, price, description);
 
-    Database.getInstance().addProduct(newProduct);
-    Database.getInstance().saveDataToFile();
-    stage.close();
+      inventoryController.addProductToTable(newProduct);
+
+      Database.getInstance().addProduct(newProduct);
+      Database.getInstance().saveDataToFile();
+      stage.close();
     }
+  }
 }

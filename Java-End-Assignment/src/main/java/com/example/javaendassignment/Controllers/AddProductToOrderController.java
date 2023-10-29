@@ -29,7 +29,7 @@ public class AddProductToOrderController {
     @FXML
     private TableView<Product> productTableView;
     @FXML
-    private Label labelErrorQuantity;
+    private Label labelError;
 
     private CreateOrderController createOrderController;
     private Database database;
@@ -71,13 +71,15 @@ public class AddProductToOrderController {
                     selectedProduct.setQuantity(quantity);
                     createOrderController.addOrderItem(selectedProduct);
                     QuantityTextField.clear();
-                    labelErrorQuantity.setText("");
+                    labelError.setText("");
                 } else {
-                    labelErrorQuantity.setText("Not enough stock available.");
+                    labelError.setText("Not enough stock available.");
                 }
+            }else {
+                labelError.setText("Please select a product!");
             }
         } catch (NumberFormatException e) {
-            labelErrorQuantity.setText("Please enter a valid quantity.");
+            labelError.setText("Please enter a valid quantity.");
         }
     }
 

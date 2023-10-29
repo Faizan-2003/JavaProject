@@ -43,7 +43,7 @@ public class CreateOrderController {
     @FXML
     private Label labelErrorInformation;
     @FXML
-    private Label labelOrderCreated;
+    private Label LabelOrderNotice;
     @FXML
     private TableView<Product> tableProductsCO;
 
@@ -73,7 +73,7 @@ public class CreateOrderController {
     public void createOrder(ActionEvent actionEvent) {
         String firstName = textFirstName.getText();
         String lastName = textLastName.getText();
-        String phoneNumber = textPhoneNumber.getText();
+        String phoneNumber = (textPhoneNumber.getText());
         String email = textEmail.getText();
         double totalAmount = calculateTotalAmount();
 
@@ -90,9 +90,10 @@ public class CreateOrderController {
             order.setTotalPrice(totalAmount);
             order.setOrderDateTime(LocalDateTime.now());
             processOrderAndUpdateDatabase(order);
+            LabelOrderNotice.setText("Order created successfully!");
             clearForm();
         }
-        labelOrderCreated.setText("Order created successfully!");
+
     }
 
     private void clearForm() {
@@ -136,6 +137,12 @@ public class CreateOrderController {
         Product selectedItem = tableProductsCO.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             orderItemsList.remove(selectedItem);
+        }
+        else{
+
+            LabelOrderNotice.setStyle("-fx-text-fill: red;");
+            LabelOrderNotice.setText("Please select an order item to delete!");
+
         }
         
     }

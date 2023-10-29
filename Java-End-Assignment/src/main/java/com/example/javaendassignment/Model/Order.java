@@ -94,12 +94,21 @@ public class Order implements Serializable {
     }
 
     public String getCustomerPhone() {
+
         return customerPhone;
     }
     public void setCustomerPhone(String customerPhone) {
+
         this.customerPhone = customerPhone;
     }
     public void setTotalPrice(double totalAmount) {
+
         this.totalPrice = totalAmount;
     }
+    public void addOrderItem(Product product, int quantity) {
+        double subtotal = product.getPrice() * quantity;
+        orderItems.add(product);
+        totalPrice += subtotal;
+    }
+
 }

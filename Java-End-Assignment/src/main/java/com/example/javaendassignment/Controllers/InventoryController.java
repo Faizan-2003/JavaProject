@@ -1,4 +1,5 @@
 package com.example.javaendassignment.Controllers;
+
 import com.example.javaendassignment.Database.Database;
 import com.example.javaendassignment.Model.Product;
 import javafx.event.ActionEvent;
@@ -6,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
@@ -16,106 +18,107 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 public class InventoryController {
-    @FXML
-    private TableView<Product> tableProductsInventory;
+  @FXML private TableView<Product> tableProductsInventory;
 
-    @FXML
-    private TableColumn stockColumn;
-    @FXML
-    private TableColumn nameColumn;
-    @FXML
-    private TableColumn categoryColumn;
-    @FXML
-    private TableColumn priceColumn;
-    @FXML
-    private TableColumn descriptionColumn;
-    private Database database;
+  @FXML private TableColumn stockColumn;
+  @FXML private TableColumn nameColumn;
+  @FXML private TableColumn categoryColumn;
+  @FXML private TableColumn priceColumn;
+  @FXML private TableColumn descriptionColumn;
+  @FXML private Label labelSelectionError;
+  private Database database;
 
-    public void initialize() {
-        database = Database.getInstance();
-        database.loadDataFromFile();
+  public void initialize() {
+    database = Database.getInstance();
+    database.loadDataFromFile();
 
-        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+    stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+    priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        Map<String, Product> productMap = Database.getInstance().getProducts();
-        List<Product> products = new ArrayList<>(productMap.values());
-        tableProductsInventory.getItems().setAll(products);
+    Map<String, Product> productMap = Database.getInstance().getProducts();
+    List<Product> products = new ArrayList<>(productMap.values());
+    tableProductsInventory.getItems().setAll(products);
+  }
 
+  public void openAddProductWindow(ActionEvent actionEvent) {
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/com/example/javaendassignment/AddProductWindow.fxml"));
+      Parent root = loader.load();
+
+      Stage addProductStage = new Stage();
+      addProductStage.setTitle("Add Product");
+      addProductStage.setScene(new Scene(root));
+
+      AddProductWindowController addProductController = loader.getController();
+      addProductController.setStage(addProductStage);
+      addProductController.setInventoryController(this);
+
+      addProductStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public void openAddProductWindow(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/AddProductWindow.fxml"));
-            Parent root = loader.load();
+  public void addProductToTable(Product product) {
+    tableProductsInventory.getItems().add(product);
+    database.saveDataToFile();
+  }
 
-            Stage addProductStage = new Stage();
-            addProductStage.setTitle("Add Product");
-            addProductStage.setScene(new Scene(root));
+  public void deleteProduct(ActionEvent actionEvent) {
 
-            AddProductWindowController addProductController = loader.getController();
-            addProductController.setStage(addProductStage);
-            addProductController.setInventoryController(this);
-
-            addProductStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
+    if (selectedProduct != null) {
+      tableProductsInventory.getItems().remove(selectedProduct);
+      Database.getInstance().deleteProduct(selectedProduct);
+    } else {
+      labelSelectionError.setText("Please select a product to delete!");
     }
+    database.saveDataToFile();
+  }
 
-    public void addProductToTable(Product product) {
-        tableProductsInventory.getItems().add(product);
-        database.saveDataToFile();
+  public void editProduct(ActionEvent actionEvent) {
+    Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
 
+    if (selectedProduct != null) {
+      openEditProductWindow(selectedProduct);
+    } else {
+      labelSelectionError.setText("Please select a product to edit!");
     }
+  }
 
-    public void deleteProduct(ActionEvent actionEvent) {
+  private void openEditProductWindow(Product selectedProduct) {
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/com/example/javaendassignment/EditProduct-Window.fxml"));
+      Parent root = loader.load();
 
-        Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
-        if (selectedProduct != null) {
-            tableProductsInventory.getItems().remove(selectedProduct);
-            Database.getInstance().deleteProduct(selectedProduct);
-        }
-        database.saveDataToFile();
+      Stage editProductStage = new Stage();
+      editProductStage.setTitle("Edit Product");
+      editProductStage.setScene(new Scene(root));
+
+      EditProductWindowController editProductController = loader.getController();
+      editProductController.setStage(editProductStage);
+      editProductController.setInventoryController(this);
+      editProductController.setProductToEdit(selectedProduct);
+
+      editProductStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public void editProduct(ActionEvent actionEvent) {
+  public void updateProductInTable(Product updatedProduct) {
 
-        Product selectedProduct = tableProductsInventory.getSelectionModel().getSelectedItem();
-
-        if (selectedProduct != null) {
-            openEditProductWindow(selectedProduct);
-        }
+    int index = tableProductsInventory.getItems().indexOf(updatedProduct);
+    if (index >= 0) {
+      tableProductsInventory.getItems().set(index, updatedProduct);
     }
-    private void openEditProductWindow(Product selectedProduct) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/EditProduct-Window.fxml"));
-            Parent root = loader.load();
-
-            Stage editProductStage = new Stage();
-            editProductStage.setTitle("Edit Product");
-            editProductStage.setScene(new Scene(root));
-
-            EditProductWindowController editProductController = loader.getController();
-            editProductController.setStage(editProductStage);
-            editProductController.setInventoryController(this);
-            editProductController.setProductToEdit(selectedProduct);
-
-            editProductStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void updateProductInTable(Product updatedProduct) {
-
-        int index = tableProductsInventory.getItems().indexOf(updatedProduct);
-        if (index >= 0) {
-            tableProductsInventory.getItems().set(index, updatedProduct);
-        }
-    }
+  }
 }

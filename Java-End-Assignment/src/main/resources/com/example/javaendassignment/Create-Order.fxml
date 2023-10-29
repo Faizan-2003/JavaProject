@@ -42,6 +42,6 @@
       <Button fx:id="buttonDeleteProduct" layoutX="130.0" layoutY="469.0" mnemonicParsing="false" onAction="#deleteOrder" text="Delete Products" />
       <Button fx:id="buttonAddProduct" layoutX="26.0" layoutY="469.0" mnemonicParsing="false" onAction="#addProducts" text="Add Products" />
       <Label fx:id="labelErrorInformation" layoutX="191.0" layoutY="66.0" prefHeight="17.0" prefWidth="265.0" textFill="RED" />
-      <Label fx:id="labelOrderCreated" layoutX="350.0" layoutY="473.0" prefHeight="17.0" prefWidth="240.0" />
+      <Label fx:id="LabelOrderNotice" layoutX="350.0" layoutY="473.0" prefHeight="17.0" prefWidth="356.0" />
    </children>
 </AnchorPane>

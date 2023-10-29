@@ -26,7 +26,7 @@
          </font>
       </Label>
       <TextField fx:id="QuantityTextField" maxWidth="112.0" minWidth="100.0" prefHeight="25.0" prefWidth="112.0" translateX="130.0" translateY="39.0" />
-      <Label fx:id="labelErrorQuantity" prefHeight="17.0" prefWidth="322.0" textFill="RED" translateX="250.0" translateY="15.0" text=""/>
+      <Label fx:id="labelError" prefHeight="17.0" prefWidth="322.0" text="" textFill="RED" translateX="250.0" translateY="15.0" />
       <Button fx:id="addToOrderButton" mnemonicParsing="false" onAction="#addItemToOrder" prefHeight="23.0" prefWidth="95.0" text="Add to order" translateX="20.0" translateY="65.0" />
       <Button fx:id="buttonCancel" layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#goBackToCreateOrder" prefHeight="23.0" prefWidth="95.0" text="Cancel" translateX="130.0" translateY="40.0" />
    </children>
