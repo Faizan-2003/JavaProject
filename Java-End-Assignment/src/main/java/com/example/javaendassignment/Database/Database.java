@@ -71,7 +71,9 @@ public class Database {
 
     public void loadDataFromFile() {
         File file = new File(dataFileName);
-
+        if(!file.exists()) {
+            saveDataToFile();
+        }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             ApplicationData applicationData = (ApplicationData) ois.readObject();
             users.clear();
