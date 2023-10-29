@@ -1,0 +1,20 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ8åïƒâ·1
+y
+java:S1450$"WRemove the "database" field and declare it as a local variable in the relevant methods.(áæß”üÿÿÿÿ8ğƒâ·1
+d
+java:S11267"BReplace this if-then-else statement by a single method invocation.(ª¿‡ãùÿÿÿÿ8‘ğƒâ·1
+T
+java:S1172>"2Remove this unused method parameter "actionEvent".(‚çé™úÿÿÿÿ8’ğƒâ·1
+L
+java:S1172C"/Remove this unused method parameter "username".(óíù8“ğƒâ·1
+T
+java:S1172Q"2Remove this unused method parameter "actionEvent".(¢¹œøûÿÿÿÿ8¤ğƒâ·1
+O
+java:S1172W"2Remove this unused method parameter "actionEvent".(úğ™¡8¥ğƒâ·1
+O
+java:S1172]"2Remove this unused method parameter "actionEvent".(°·Ò8¦ğƒâ·1
+Q
+java:S1172}"/Remove this unused method parameter "userRole".(óœœœüÿÿÿÿ8©ğƒâ·1
+N
+java:S1068$",Remove this unused "database" private field.(áæß”üÿÿÿÿ8ªğƒâ·1
