@@ -1,0 +1,13 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ8æîõ¶·1
+b
+java:S2259l"EA "NullPointerException" could be thrown; "product" is nullable here.(éÆ’8ö¼½·1
+}
+java:S1450("[Remove the "orderHistory" field and declare it as a local variable in the relevant methods.(¬œê­ùÿÿÿÿ8ø¼½·1
+~
+java:S1450)"\Remove the "orderProducts" field and declare it as a local variable in the relevant methods.(¦äÏÎûÿÿÿÿ8ø¼½·1
+X	java:S125t"<This block of commented-out lines of code should be removed.(–‰³Š8ƒ¼½·1
+[
+java:S1172"9Remove this unused method parameter "tableViewSortEvent".(·ÉÏÙúÿÿÿÿ8„¼½·1
+_
+java:S1117„"ARename "orderProducts" which hides the field declared at line 41.(å©ò‰8êèî½·1

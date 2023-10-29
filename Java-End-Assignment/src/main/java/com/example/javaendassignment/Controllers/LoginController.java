@@ -1,6 +1,6 @@
 package com.example.javaendassignment.Controllers;
 import com.example.javaendassignment.Database.Database;
-import com.example.javaendassignment.Model.User;
+import com.example.javaendassignment.Model.UserRole;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -76,14 +76,14 @@ public class LoginController {
 
     private void openMainWindow(String username) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/MainWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaendassignment/MainDashboard.fxml"));
             Parent root = loader.load();
 
-            MainWindowController mainWindowController = loader.getController();
+            MainDashboardController mainWindowController = loader.getController();
 
             mainWindowController.initialize(database);
 
-            String userRole = String.valueOf(database.getUserRole(username));
+            UserRole userRole = UserRole.valueOf(String.valueOf(database.getUserRole(username)));
             String userName = database.getUserFullName(username);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date now = new Date();

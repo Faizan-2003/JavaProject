@@ -1,0 +1,7 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÕµÇþÿÿÿÿ8¤ˆ× ·1
+>
+java:S1170"!Make this final field static too.(µŸÊ½8Œý¾º·1
+G	java:S106V"+Replace this use of System.out by a logger.(â¾Ûþ8ëú¡¼·1
+T
+java:S2175Œ"6A "ObservableList<Product>" cannot contain a "String".(§º¯œ8¤²ìº·1

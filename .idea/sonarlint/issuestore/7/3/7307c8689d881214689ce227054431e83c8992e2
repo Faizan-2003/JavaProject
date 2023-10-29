@@ -1,0 +1,10 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(æ¼ç¤8ÁÏ†¼·1
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8ÍÏ†¼·1
+S
+java:S1128"6Remove this unused import 'java.io.ObjectInputStream'.(Éæéœ8ÍÏ†¼·1
+Y
+java:S1128"7Remove this unused import 'java.io.ObjectOutputStream'.(é»Óºûÿÿÿÿ8ÍÏ†¼·1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ã‡¼·1

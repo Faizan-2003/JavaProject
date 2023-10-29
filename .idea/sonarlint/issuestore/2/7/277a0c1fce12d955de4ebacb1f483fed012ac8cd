@@ -1,0 +1,9 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÕµÇşÿÿÿÿ
+@
+java:S1128
+"Remove this duplicated import.(èãîÂÿÿÿÿÿ8ÈÊô»·1
+P
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ÈÊô»·1
+@
+java:S1128"Remove this duplicated import.(¼è½Òşÿÿÿÿ8Š“î»·1

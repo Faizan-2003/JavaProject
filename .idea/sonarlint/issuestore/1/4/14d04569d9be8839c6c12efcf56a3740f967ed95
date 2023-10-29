@@ -1,0 +1,23 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ8®é¿»·1
+y
+java:S1450"WRemove the "database" field and declare it as a local variable in the relevant methods.(áæß”üÿÿÿÿ8ýé¿»·1
+T
+java:S11722"2Remove this unused method parameter "actionEvent".(‚çé™úÿÿÿÿ8‚ê¿»·1
+L
+java:S1172<"/Remove this unused method parameter "username".(óíù8…ê¿»·1
+T
+java:S1172P"2Remove this unused method parameter "actionEvent".(¢¹œøûÿÿÿÿ8£ê¿»·1
+O
+java:S1172U"2Remove this unused method parameter "actionEvent".(úð™¡8¤ê¿»·1
+O
+java:S1172Y"2Remove this unused method parameter "actionEvent".(°·ŽÒ8¥ê¿»·1
+o	java:S100^"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çáøùùÿÿÿÿ8¥ê¿»·1
+i	java:S100l"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·ý68¨ê¿»·1
+j	java:S100w"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôŠÒ¬8¬ê¿»·1
+T
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8®ê¿»·1
+H
+java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8®ê¿»·1
+N
+java:S1068",Remove this unused "database" private field.(áæß”üÿÿÿÿ8¯ê¿»·1

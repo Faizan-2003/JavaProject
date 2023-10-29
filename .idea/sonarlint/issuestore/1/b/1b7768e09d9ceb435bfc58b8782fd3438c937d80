@@ -1,0 +1,8 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ
+O
+java:S1172*"2Remove this unused method parameter "actionEvent".(â·¿Ï8¶‹÷óµ1
+T
+java:S1172O"2Remove this unused method parameter "actionEvent".(Á±Žäùÿÿÿÿ8ŽÏ‰ôµ1
+N
+java:S1068",Remove this unused "database" private field.(áæß”üÿÿÿÿ8¶ßž¼·1
