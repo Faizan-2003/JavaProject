@@ -77,7 +77,7 @@ public class CreateOrderController {
         String email = textEmail.getText();
         double totalAmount = calculateTotalAmount();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || tableProductsCO.getItems().isEmpty()) {
             labelErrorInformation.setText("Please fill in all the fields.");
         } else {
             labelErrorInformation.setText("");
