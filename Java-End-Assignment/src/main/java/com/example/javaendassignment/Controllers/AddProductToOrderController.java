@@ -30,6 +30,8 @@ public class AddProductToOrderController {
     private TableView<Product> productTableView;
     @FXML
     private Label labelError;
+    @FXML
+    private TextField textSearchProduct;
 
     private CreateOrderController createOrderController;
     private Database database;

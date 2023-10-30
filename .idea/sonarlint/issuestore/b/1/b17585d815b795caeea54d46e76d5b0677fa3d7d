@@ -1,11 +1,11 @@
 
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ8‡ÏÁï·1
-|	java:S116."[Rename this field "LabelOrderNotice" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½™ú‡ıÿÿÿÿ8ªÏÁï·1
-I
-java:S1602@",Remove useless curly braces around statement(ÍÜŒÏ8±ÏÁï·1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÁïíÑúÿÿÿÿ8¾†Øï·1
+w	java:S116#"[Rename this field "LabelOrderNotice" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ—Ê—8Üãï·1
+N
+java:S16028",Remove useless curly braces around statement(şş•ıÿÿÿÿ8ããï·1
 O
-java:S1172I"2Remove this unused method parameter "actionEvent".(Ô¦°8´ÏÁï·1
+java:S1172A"2Remove this unused method parameter "actionEvent".(Ô¦°8åãï·1
 P
-java:S1172ˆ"2Remove this unused method parameter "actionEvent".(‹‡Æ„8ÁÏÁï·1
+java:S1172‚"2Remove this unused method parameter "actionEvent".(‹‡Æ„8ğãï·1
 P
-java:S1172–"2Remove this unused method parameter "actionEvent".(ÀÃ¯Ş8ÃÏÁï·1
+java:S1172"2Remove this unused method parameter "actionEvent".(ÀÃ¯Ş8óãï·1
