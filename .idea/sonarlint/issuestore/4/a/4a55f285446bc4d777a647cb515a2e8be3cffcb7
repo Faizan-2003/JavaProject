@@ -1,7 +1,6 @@
 
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÕµÇşÿÿÿÿ8§¦„ã·1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÕµÇşÿÿÿÿ8½é‘ï·1
 >
-java:S1170"!Make this final field static too.(µŸÊ½8È¦„ã·1
-G	java:S106W"+Replace this use of System.out by a logger.(â¾Ûş8‡úĞã·1
+java:S1170"!Make this final field static too.(µŸÊ½8Óé‘ï·1
 T
-java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8èÜ„ã·1
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8ëé‘ï·1

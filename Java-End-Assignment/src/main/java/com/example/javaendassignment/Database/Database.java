@@ -89,12 +89,9 @@ public class Database {
         }
     }
     public void useInstanceData() {
-        Map<String, Product> products = new HashMap<>();
         products.put("g40Guitar", new Product(4, "G40 Guitar", "Guitar", 290.99, "The rarest guitar in the world"));
         products.put("v10Violin", new Product(7, "V10 Violin", "Violin", 109.99, "Everyone wants this violin"));
         products.put("p00Piano", new Product(6, "P009 Piano", "Piano", 1099.99, "The piano everyone should have"));
-
-        List<Order> orders = new ArrayList<>();
 
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -102,12 +99,12 @@ public class Database {
         firstOrder.setOrderDateTime(dateTime);
         firstOrder.addOrderItem(products.get("g40Guitar"), 2);
         firstOrder.addOrderItem(products.get("v10Violin"), 1);
-        orders.add(firstOrder);
+        orders.put("john",firstOrder);
 
         Order secondOrder = new Order("Jane", "Smith", "9876543210", "jane.smith@example.com");
         secondOrder.setOrderDateTime(dateTime);
         secondOrder.addOrderItem(products.get("p00Piano"), 1);
-        orders.add(secondOrder);
+        orders.put("jane",secondOrder);
     }
 
     public void addProduct(Product product) {
