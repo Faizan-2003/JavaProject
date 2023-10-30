@@ -17,119 +17,110 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderHistoryController {
-    @FXML
-    private TableView<Order> tableOrderHistory;
-    @FXML
-    private TableColumn<Order, LocalDateTime> orderDateTimeColumn;
-    @FXML
-    private TableColumn<Order, String> customerFirstNameColumn;
-    @FXML
-    private TableColumn<Order, Double> totalPriceColumn;
-    @FXML
-    private TableView<Product> tableOrderProducts;
-    @FXML
-    private TableColumn<Product, Integer> quantityColumn;
-    @FXML
-    private TableColumn<Product, String> nameColumn;
-    @FXML
-    private TableColumn<Product, String> categoryColumn;
-    @FXML
-    private TableColumn<Product, Double> priceColumn;
+  @FXML private TableView<Order> tableOrderHistory;
+  @FXML private TableColumn<Order, LocalDateTime> orderDateTimeColumn;
+  @FXML private TableColumn<Order, String> customerFirstNameColumn;
+  @FXML private TableColumn<Order, Double> totalPriceColumn;
+  @FXML private TableView<Product> tableOrderProducts;
+  @FXML private TableColumn<Product, Integer> quantityColumn;
+  @FXML private TableColumn<Product, String> nameColumn;
+  @FXML private TableColumn<Product, String> categoryColumn;
+  @FXML private TableColumn<Product, Double> priceColumn;
 
-    private Database database;
-    private ObservableList<Order> orderHistory;
-    private ObservableList<Product> orderProducts;
+  private Database database;
+  private ObservableList<Order> orderHistory;
+  private ObservableList<Product> orderProducts;
 
-    public void initialize(){
+  public void initialize() {
 
-        initializeDatabaseAndTables();
-        initializeTableColumns();
-        setupCellFactory();
-        initializeEventHandlers();
-        loadOrderHistory();
-    }
+    initializeDatabaseAndTables();
+    initializeTableColumns();
+    setupCellFactory();
+    initializeEventHandlers();
+    loadOrderHistory();
+  }
 
-    private void initializeDatabaseAndTables() {
-        database = Database.getInstance();
-        database.loadDataFromFile();
-    }
+  private void initializeDatabaseAndTables() {
+    database = Database.getInstance();
+    database.loadDataFromFile();
+  }
 
-    private void initializeTableColumns() {
-        orderDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("orderDateTime"));
-        customerFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerFirstName"));
-        totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-    }
+  private void initializeTableColumns() {
+    orderDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("orderDateTime"));
+    customerFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerFirstName"));
+    totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 
-    private void setupCellFactory() {
-        orderDateTimeColumn.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
-            @Override
-            protected void updateItem(LocalDateTime item, boolean empty) {
+    quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+    priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+  }
+
+  private void setupCellFactory() {
+    orderDateTimeColumn.setCellFactory(
+        column ->
+            new TableCell<Order, LocalDateTime>() {
+              @Override
+              protected void updateItem(LocalDateTime item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item == null || empty) {
-                    setText(null);
+                  setText(null);
                 } else {
-                    setText(item.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                  setText(item.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 }
-            }
-        });
-    }
+              }
+            });
+  }
 
-    private void initializeEventHandlers() {
-        tableOrderHistory.setOnMouseClicked(event -> handleOrderHistoryClick());
-    }
+  private void initializeEventHandlers() {
+    tableOrderHistory.setOnMouseClicked(event -> handleOrderHistoryClick());
+  }
 
-    private void handleOrderHistoryClick() {
-        Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
-        tableOrderProducts.setItems(FXCollections.observableArrayList(selectedOrder != null ? selectedOrder.getOrderItems() : null));
-    }
+  private void handleOrderHistoryClick() {
+    Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
+    tableOrderProducts.setItems(
+        FXCollections.observableArrayList(
+            selectedOrder != null ? selectedOrder.getOrderItems() : null));
+  }
 
+  private void loadOrderHistory() {
+    List<Order> allOrders = database.getAllOrders();
 
-    private void loadOrderHistory() {
-        List<Order> allOrders = database.getAllOrders();
+    if (allOrders != null) {
+      orderHistory = FXCollections.observableArrayList(allOrders);
 
-        if (allOrders != null) {
-            orderHistory = FXCollections.observableArrayList(allOrders);
+      tableOrderHistory.setItems(orderHistory);
 
-            tableOrderHistory.setItems(orderHistory);
+      for (Order order : orderHistory) {
+        List<Product> orderProductsList = order.getOrderItems();
 
-            for (Order order : orderHistory) {
-                List<Product> orderProductsList = order.getOrderItems();
+        if (orderProductsList != null) {
+          orderProducts = FXCollections.observableArrayList(orderProductsList);
 
-                if (orderProductsList != null) {
-                    orderProducts = FXCollections.observableArrayList(orderProductsList);
+          for (Product product : orderProducts) {
+            double totalAmount = calculateTotalAmount(product);
+            product.setTotalPrice(totalAmount);
+          }
 
-                    for (Product product : orderProducts) {
-                        double totalAmount = calculateTotalAmount(product);
-                        product.setTotalPrice(totalAmount);
-                    }
-
-                    // Set the order products data
-                    tableOrderProducts.setItems(orderProducts);
-                }
-            }
+          tableOrderProducts.setItems(orderProducts);
         }
-        //database.saveDataToFile();
+      }
     }
+  }
 
-    private double calculateTotalAmount(Product product) {
-        if (product == null) {
-            return 0.0;
-        }
-
-        return product.getTotalPrice();
+  private double calculateTotalAmount(Product product) {
+    if (product == null) {
+      return 0.0;
     }
+    return product.getTotalPrice();
+  }
 
-    public void displayOrderProducts(SortEvent<TableView<Product>> tableViewSortEvent) {
-        Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
+  public void displayOrderProducts(SortEvent<TableView<Product>> tableViewSortEvent) {
+    Order selectedOrder = tableOrderHistory.getSelectionModel().getSelectedItem();
 
-        if (selectedOrder != null) {
-            List<Product> orderProducts = selectedOrder.getOrderItems();
-
-            tableOrderProducts.getItems().setAll(orderProducts);
-        }
+    if (selectedOrder != null) {
+      List<Product> orderProducts = selectedOrder.getOrderItems();
+      tableOrderProducts.getItems().setAll(orderProducts);
     }
+  }
 }

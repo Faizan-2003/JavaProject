@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class EditProductWindowController {
     @FXML
     private TextField textStockAP;
@@ -22,6 +24,7 @@ public class EditProductWindowController {
     private Stage stage;
     private InventoryController inventoryController;
     private Product productToEdit;
+    private Label labelProductNotice;
 
     public void setProductToEdit(Product product) {
         this.productToEdit = product;
@@ -40,13 +43,12 @@ public class EditProductWindowController {
 
     public void editTheProduct(ActionEvent actionEvent) {
         if (productToEdit != null) {
-            // Get data from text fields
+
             int stock = Integer.parseInt(textStockAP.getText());
             String name = textNameAP.getText();
             String category = textCategoryAP.getText();
             double price = Double.parseDouble(textPriceAP.getText());
             String description = textDescriptionAP.getText();
-
             productToEdit.setStock(stock);
             productToEdit.setName(name);
             productToEdit.setCategory(category);

@@ -90,14 +90,14 @@ public class LoginController {
     alert.setHeaderText("Account Locked");
     alert.setContentText("Your account has been locked");
 
-    ButtonType okButton = new ButtonType("OK");
-    alert.getButtonTypes().setAll(okButton);
+    ButtonType proceedOKButton = new ButtonType("OK");
+    alert.getButtonTypes().setAll(proceedOKButton);
 
     alert
         .showAndWait()
         .ifPresent(
             response -> {
-              if (response == okButton) {
+              if (response == proceedOKButton) {
                 System.exit(0);
               }
             });

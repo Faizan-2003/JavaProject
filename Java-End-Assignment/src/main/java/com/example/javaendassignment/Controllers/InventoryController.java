@@ -26,7 +26,7 @@ public class InventoryController {
   @FXML private TableColumn categoryColumn;
   @FXML private TableColumn priceColumn;
   @FXML private TableColumn descriptionColumn;
-  @FXML private Label labelSelectionError;
+  @FXML private Label labelProductNotice;
   private Database database;
 
   public void initialize() {
@@ -76,8 +76,9 @@ public class InventoryController {
     if (selectedProduct != null) {
       tableProductsInventory.getItems().remove(selectedProduct);
       Database.getInstance().deleteProduct(selectedProduct);
+      labelProductNotice.setText("Product Deleted.");
     } else {
-      labelSelectionError.setText("Please select a product to delete!");
+      labelProductNotice.setText("Please select a product to delete..");
     }
     database.saveDataToFile();
   }
@@ -88,7 +89,7 @@ public class InventoryController {
     if (selectedProduct != null) {
       openEditProductWindow(selectedProduct);
     } else {
-      labelSelectionError.setText("Please select a product to edit!");
+      labelProductNotice.setText("Please select a product to edit..");
     }
   }
 
@@ -107,6 +108,7 @@ public class InventoryController {
       editProductController.setStage(editProductStage);
       editProductController.setInventoryController(this);
       editProductController.setProductToEdit(selectedProduct);
+
 
       editProductStage.show();
     } catch (IOException e) {

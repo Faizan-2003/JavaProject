@@ -2,8 +2,11 @@ package com.example.javaendassignment.Controllers;
 
 import com.example.javaendassignment.Database.Database;
 import com.example.javaendassignment.Model.Product;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -58,8 +61,22 @@ public class AddProductToOrderController {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         ObservableList<Product> products = FXCollections.observableArrayList(Database.getInstance().getProducts().values());
+        FilteredList<Product> filteredProducts = new FilteredList<>(products);
 
-        productTableView.setItems(products);
+        productTableView.setItems(filteredProducts);
+        textSearchProduct.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filteredProducts.setPredicate(product -> {
+                    String searchProduct = newValue.toLowerCase();
+                    if (searchProduct.length() < 3) {
+                        return true;
+                    } else {
+                        return product.getName().toLowerCase().contains(searchProduct);
+                    }
+                });
+            }
+        });
     }
 
     public void addItemToOrder(ActionEvent actionEvent) {
@@ -75,13 +92,13 @@ public class AddProductToOrderController {
                     QuantityTextField.clear();
                     labelError.setText("");
                 } else {
-                    labelError.setText("Not enough stock available.");
+                    labelError.setText("Not enough stock available!");
                 }
             }else {
-                labelError.setText("Please select a product!");
+                labelError.setText("Please select a product..");
             }
         } catch (NumberFormatException e) {
-            labelError.setText("Please enter a valid quantity.");
+            labelError.setText("Please enter a valid quantity..");
         }
     }
 

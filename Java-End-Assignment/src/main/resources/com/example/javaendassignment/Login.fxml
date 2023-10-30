@@ -25,6 +25,7 @@
             <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
         </rowConstraints>
         <children>
             <Label text="Username">
@@ -49,8 +50,5 @@
          <Insets top="23.0" />
       </opaqueInsets>
     </GridPane>
-    <Label fx:id="ErrorMessage" prefHeight="17.0" prefWidth="196.0" text="" textFill="RED" GridPane.rowIndex="3">
-    <VBox.margin>
-         <Insets top="-12.0" />
-      </VBox.margin></Label>
+    <Label fx:id="ErrorMessage" prefHeight="20.0" prefWidth="250.0" text="" textFill="RED" translateX="10.0" translateY="-30.0" />
 </VBox>

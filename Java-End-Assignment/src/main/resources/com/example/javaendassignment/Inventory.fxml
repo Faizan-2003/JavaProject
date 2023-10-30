@@ -23,6 +23,6 @@
         <Button fx:id="buttonAddProduct" layoutX="31.0" layoutY="449.0" mnemonicParsing="false" onAction="#openAddProductWindow" prefHeight="25.0" prefWidth="90.0" text="Add Product" />
         <Button fx:id="buttonDeleteProduct" layoutX="245.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="25.0" prefWidth="109.0" text="Delete Product" />
         <Button fx:id="buttonEditProduct" layoutX="138.0" layoutY="449.0" mnemonicParsing="false" onAction="#editProduct" prefHeight="25.0" prefWidth="90.0" text="Edit Product" />
-      <Label fx:id="labelSelectionError" layoutX="378.0" layoutY="453.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
+      <Label fx:id="labelProductNotice" layoutX="378.0" layoutY="453.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
     </children>
 </AnchorPane>
