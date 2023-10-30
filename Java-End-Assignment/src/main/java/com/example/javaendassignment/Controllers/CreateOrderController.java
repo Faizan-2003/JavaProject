@@ -77,8 +77,11 @@ public class CreateOrderController {
         String email = textEmail.getText();
         double totalAmount = calculateTotalAmount();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || tableProductsCO.getItems().isEmpty()) {
-            labelErrorInformation.setText("Please fill in all the fields.");
+        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+            labelErrorInformation.setText("Please fill in all the fields!");
+        }
+        if(tableProductsCO.getItems().isEmpty()){
+            labelErrorInformation.setText("Please add a product!.");
         } else {
             labelErrorInformation.setText("");
             Order order = new Order();
