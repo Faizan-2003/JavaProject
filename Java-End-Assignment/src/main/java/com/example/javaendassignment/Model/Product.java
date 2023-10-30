@@ -46,7 +46,6 @@ public class Product implements Serializable {
             stock -= quantity;
         }
     }
-
     public String getName() {
         return name;
     }

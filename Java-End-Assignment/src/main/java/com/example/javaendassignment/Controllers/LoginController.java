@@ -9,10 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
-import javax.security.auth.login.AccountLockedException;
 import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import com.example.javaendassignment.Exceptions.AccountLockedException;
 
 public class LoginController {
 
@@ -61,7 +61,6 @@ public class LoginController {
     }
     return false;
   }
-
   @FXML
   private void onLoginButtonClick() {
     String username = UsernameField.getText();
@@ -72,7 +71,7 @@ public class LoginController {
     } else {
       loginAttempts++;
 
-      if (loginAttempts >= 3) {
+      if (loginAttempts > 3) {
           try {
           throw new AccountLockedException("Account Locked");
         } catch (AccountLockedException e) {

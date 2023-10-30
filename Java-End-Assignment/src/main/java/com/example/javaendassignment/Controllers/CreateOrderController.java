@@ -104,7 +104,6 @@ public class CreateOrderController {
     for (Product item : orderItemsList) {
       totalAmount += item.getPrice() * item.getQuantity();
     }
-
     return totalAmount;
   }
 

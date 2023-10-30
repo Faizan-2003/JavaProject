@@ -50,10 +50,14 @@ public class AddProductToOrderController {
     }
 
     public void initialize() {
-
         database = Database.getInstance();
         database.loadDataFromFile();
 
+        setupTableColumns();
+        setupSearchFilter();
+    }
+
+    private void setupTableColumns() {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -64,18 +68,19 @@ public class AddProductToOrderController {
         FilteredList<Product> filteredProducts = new FilteredList<>(products);
 
         productTableView.setItems(filteredProducts);
-        textSearchProduct.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filteredProducts.setPredicate(product -> {
-                    String searchProduct = newValue.toLowerCase();
-                    if (searchProduct.length() < 3) {
-                        return true;
-                    } else {
-                        return product.getName().toLowerCase().contains(searchProduct);
-                    }
-                });
-            }
+    }
+
+    private void setupSearchFilter() {
+        textSearchProduct.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<Product> filteredProducts = (FilteredList<Product>) productTableView.getItems();
+            filteredProducts.setPredicate(product -> {
+                String searchProduct = newValue.toLowerCase();
+                if (searchProduct.length() < 3) {
+                    return true;
+                } else {
+                    return product.getName().toLowerCase().contains(searchProduct);
+                }
+            });
         });
     }
 

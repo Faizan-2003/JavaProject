@@ -49,7 +49,17 @@ public class OrderHistoryController {
     orderDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("orderDateTime"));
     customerFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerFirstName"));
     totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-
+    totalPriceColumn.setCellFactory(column -> new TableCell<Order, Double>() {
+      @Override
+      protected void updateItem(Double item, boolean empty) {
+        super.updateItem(item, empty);
+        if (item == null || empty) {
+          setText(null);
+        } else {
+          setText(String.format("%.2f", item));
+        }
+      }
+    });
     quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -88,12 +98,10 @@ public class OrderHistoryController {
 
     if (allOrders != null) {
       orderHistory = FXCollections.observableArrayList(allOrders);
-
       tableOrderHistory.setItems(orderHistory);
 
       for (Order order : orderHistory) {
         List<Product> orderProductsList = order.getOrderItems();
-
         if (orderProductsList != null) {
           orderProducts = FXCollections.observableArrayList(orderProductsList);
 
@@ -101,7 +109,6 @@ public class OrderHistoryController {
             double totalAmount = calculateTotalAmount(product);
             product.setTotalPrice(totalAmount);
           }
-
           tableOrderProducts.setItems(orderProducts);
         }
       }
